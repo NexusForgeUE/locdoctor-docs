@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="site-root" content="./">
+  <meta name="description" content="Learn to install LocDoctor, translate Unreal Engine game text with local AI, an API or your own chat, and prepare translations for release.">
+  <title>LocDoctor documentation | Unreal Engine</title>
+  <link rel="icon" type="image/svg+xml" href="assets/locdoctor.svg">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/app.js" defer></script>
+</head>
+<body data-search-one="{count} chapter found." data-search-many="{count} chapters found." data-search-empty="No chapters found. Try a shorter search.">
+  <a class="skip-link" href="#main">Skip to documentation</a>
+  <header class="site-header">
+    <a class="brand" href="#overview" aria-label="LocDoctor documentation home"><img src="assets/locdoctor.svg" alt="" width="38" height="38"><span>LocDoctor</span></a>
+    <span class="header-label">Documentation</span>
+    <div class="header-actions"><label class="language-picker"><span class="visually-hidden">Documentation language</span><select id="doc-locale" aria-label="Documentation language"><option value="en" selected>English</option><option value="zh-Hans">简体中文</option><option value="ru">Русский</option><option value="es">Español</option><option value="pt-BR">Português (Brasil)</option><option value="de">Deutsch</option><option value="ja">日本語</option><option value="fr">Français</option><option value="ko">한국어</option></select></label><span class="version">1.0.0</span><button class="print-button" type="button" id="print-guide">Print guide</button><button class="menu-button" type="button" id="menu-toggle" aria-controls="sidebar" aria-expanded="false">Menu</button></div>
+  </header>
+  <div class="site-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="search-box"><label for="doc-search">Search this guide</label><input id="doc-search" type="search" placeholder="Try: API key or preview" autocomplete="off" aria-controls="search-results"><div id="search-results" class="search-results" hidden></div><p class="visually-hidden" id="search-status" role="status"></p></div>
+      <nav aria-label="Documentation chapters">
+        <p class="nav-heading">Getting started</p>
+        <a href="#overview" aria-current="location">Overview</a>
+        <a href="#installation">Installation</a>
+        <a href="#quick-start">Your first translation</a>
+        <a href="#languages">Languages and game text</a>
+        <p class="nav-heading">Choose how to translate</p>
+        <a href="#local-models">On my computer</a>
+        <a href="#browser-chat">In my chat</a>
+        <a href="#api">Through an API</a>
+        <p class="nav-heading">Review and ship</p>
+        <a href="#review">Review translations</a>
+        <a href="#glossary-history">Glossary and history</a>
+        <a href="#prepare-game">Prepare for the game</a>
+        <p class="nav-heading">Reference</p>
+        <a href="#tools">Tools and file exchange</a>
+        <a href="#troubleshooting">Troubleshooting</a>
+        <a href="#faq">Common questions</a>
+        <a href="#version">Version and support</a>
+      </nav>
+      <div class="sidebar-footer">Unreal Engine 5.7 / 5.8<br>Windows 64-bit</div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <section class="doc-section overview" id="overview" aria-labelledby="overview-title" data-search="getting started beginner introduction AI localization">
+        <p class="eyebrow">LOCDOCTOR 1.0.0 USER GUIDE</p>
+        <h1 id="overview-title">Translate your game.<br>Keep control of every word.</h1>
+        <p class="lead">Translate Unreal Engine game text with a local model, your AI chat or an API service. Review the results in the editor, then prepare them for your game.</p>
+        <div class="intro-actions"><a class="primary-link" href="#quick-start">Start your first translation</a><a class="secondary-link" href="#installation">Install LocDoctor</a></div>
+        <div class="workflow" aria-label="The five translation steps"><span><b>1</b> Languages</span><span><b>2</b> Texts</span><span><b>3</b> Translate</span><span><b>4</b> Review</span><span><b>5</b> For the game</span></div>
+        <div class="intro-note"><strong>New to AI?</strong> A model is the AI that translates your text. An API key lets LocDoctor connect to an online service. If you already use an AI chat, you can start without a key.</div>
+        <h2>Choose the method you already have</h2>
+        <div class="method-cards">
+          <a href="#local-models"><span class="method-symbol" aria-hidden="true">1</span><h3>On my computer</h3><p>Use an installed local text model.</p><span>Ollama, LM Studio, Jan, GPT4All</span></a>
+          <a href="#browser-chat"><span class="method-symbol" aria-hidden="true">2</span><h3>In my chat</h3><p>Send a request file in your own chat.</p><span>No API key needed</span></a>
+          <a href="#api"><span class="method-symbol" aria-hidden="true">3</span><h3>Through an API</h3><p>Translate automatically through a service.</p><span>Service API key required when requested</span></a>
+        </div>
+      </section>
+      <section class="doc-section" id="installation" aria-labelledby="installation-title" data-search="install enable plugin Plugins missing modules compiler Fab zip Windows version">
+        <p class="eyebrow">GETTING STARTED</p><h2 id="installation-title">Installation</h2>
+        <p>LocDoctor 1.0.0 supports Unreal Engine 5.7 and 5.8 on Windows 64-bit. Use the package that matches your engine version.</p>
+        <h3>Install through Fab</h3>
+        <p>Install the plugin for the matching engine using your Fab Library in the Epic Games Launcher. Open your project, enable <strong>LocDoctor</strong> in <strong>Edit &gt; Plugins</strong> if needed, and restart the editor.</p>
+        <h3>Install from a ZIP</h3>
+        <ol class="steps"><li>Close Unreal Editor.</li><li>Extract the package so that <code>LocDoctor.uplugin</code> is directly inside <code>&lt;YourProject&gt;/Plugins/LocDoctor/</code>. If the ZIP already contains a <code>LocDoctor</code> folder, place that folder inside <code>Plugins</code>.</li><li>Open the project. Enable <strong>LocDoctor</strong> in <strong>Edit &gt; Plugins</strong> if needed, then restart the editor.</li><li>Open <strong>Tools &gt; LocDoctor</strong>.</li></ol>
+        <pre><code>YourProject/
+  YourProject.uproject
+  Plugins/
+    LocDoctor/
+      LocDoctor.uplugin
+      Resources/
+      Source/</code></pre>
+        <p class="small">A package with compiled files also contains a Binaries folder. If you use a source-only package, Unreal needs a compatible C++ build toolchain to build the editor modules.</p>
+      </section>
+      <section class="doc-section" id="quick-start" aria-labelledby="quick-start-title" data-search="start tutorial first translation collect texts connection drafts setup wizard">
+        <p class="eyebrow">GETTING STARTED</p><h2 id="quick-start-title">Your first translation</h2>
+        <p>Start with one language and a small set of game texts. Plugin button labels match this guide's language. Unreal Editor's own menu names are shown in English.</p>
+        <ol class="steps"><li><strong>Choose your languages.</strong> Open <strong>Tools &gt; LocDoctor</strong>. Choose the language in which your game texts were written and at least one translation language. On first use, click <strong>Create settings and continue</strong>. Keep the advanced settings at their defaults unless your project needs a different asset folder or text target.</li><li><strong>Collect your texts.</strong> On the <strong>Texts</strong> step, click <strong>Collect texts</strong>. Save changed game assets if Unreal asks. Check that the project summary contains the texts you expect.</li><li><strong>Choose a translation method.</strong> Use <a href="#local-models">On my computer</a>, <a href="#browser-chat">In my chat</a> or <a href="#api">Through an API</a>. For automatic methods, select a model and click <strong>Check connection</strong>. This tests a short translation. After a successful test, the main button becomes <strong>Translate texts</strong>.</li><li><strong>Review the result.</strong> AI translations are saved as drafts. On the <strong>Review</strong> step, check each translation, edit it if needed, and save your selected translations.</li><li><strong>Prepare the game.</strong> On <strong>For the game</strong>, click <strong>Prepare for the game</strong>. Test the game in each language and include those languages in your <a href="#prepare-game">packaging settings</a>.</li></ol>
+        <figure class="screenshot"><a href="assets/screens/en/first-run.png" target="_blank" rel="noopener" aria-label="Open the setup screenshot at full size"><img src="assets/screens/en/first-run.png" width="1920" height="1080" alt="LocDoctor first-use setup with the original language and translation language controls." loading="lazy"></a><figcaption>First-use setup in Unreal Editor. Click to open the Full HD image.</figcaption></figure>
+      </section>
+      <section class="doc-section" id="languages" aria-labelledby="languages-title" data-search="source original target language add remove FText FString String Table localization gather empty Chinese English Spanish">
+        <h2 id="languages-title">Languages and game text</h2>
+        <h3>Original language, translation languages and interface language</h3>
+        <ul><li><strong>Original text language:</strong> the language in which your source game text is written.</li><li><strong>Translate into:</strong> the languages to work on in the current translation job. Untick a language to leave it out of this job.</li><li><strong>Interface language:</strong> the selector at the top of LocDoctor. It changes the plugin interface only. English is the default.</li></ul>
+        <p>A text target, usually named <strong>Game</strong>, is Unreal's localization configuration for a set of texts. If your project has several targets, select the one you want to translate.</p>
+        <h3>Add or remove a language</h3>
+        <figure class="screenshot"><a href="assets/screens/en/languages.png" target="_blank" rel="noopener"><img src="assets/screens/en/languages.png" width="1920" height="1080" alt="The Languages step with translation languages and add and remove controls." loading="lazy"></a><figcaption>Choose the languages you want to work on.</figcaption></figure>
+        <p>The first suggestions are 12 popular translation languages. Click <strong>Add language</strong> to find another language by name or Unreal culture code. Click <strong>Remove language</strong> to remove a language from the text target's configuration. Saved translation files are kept so that you can add the language again later.</p>
+        <h3>Which texts can be translated?</h3>
+        <p>LocDoctor works with localizable <code>FText</code> and <strong>String Tables</strong> collected by Unreal's localization system. Ordinary <code>FString</code> values and texts marked as culture invariant are not automatically localizable. Use <strong>Tools &gt; Project check</strong> to look for these cases.</p>
+        <div class="callout"><strong>Keep text identifiers stable.</strong> Edit a game's source text in the game assets or code, then collect texts again. Newly collected or changed texts may need a new translation.</div>
+      </section>
+      <section class="doc-section" id="local-models" aria-labelledby="local-title" data-search="Ollama LM Studio Jan GPT4All local model server port GPU RAM memory installation discover custom llama.cpp LocalAI vLLM">
+        <p class="eyebrow">TRANSLATION METHODS</p><h2 id="local-title">On my computer</h2>
+        <p>Use a downloaded text model through an application running on your computer. LocDoctor connects to the application's API server. It does not install applications or download models.</p>
+        <ol class="steps"><li>Install your preferred model application. Download a text generation model that fits your computer's memory and supports your translation languages.</li><li>Start the application and enable its local API server. Keep it running while you translate.</li><li>In LocDoctor, choose <strong>On my computer</strong>, then <strong>Choose a model</strong>. Click <strong>Find models</strong> to refresh the list.</li><li>Select a model. Click <strong>Check connection</strong> if a test has not already started, and wait for the short sample translation to finish.</li><li>When the connection is ready, click <strong>Translate texts</strong>.</li></ol>
+        <h3>Set up your local application</h3>
+        <div class="table-scroll"><table><caption>Local application setup and default addresses checked by LocDoctor</caption><thead><tr><th>Application</th><th>What to start</th><th>Default API address</th></tr></thead><tbody>
+          <tr><td>Ollama</td><td>Open Ollama with a downloaded local text model. Its local server normally starts with the application.</td><td><code>http://127.0.0.1:11434</code></td></tr>
+          <tr><td>LM Studio</td><td>Open <strong>Developer</strong> and start the API server. Make a text model available to that server.</td><td><code>http://127.0.0.1:1234/v1</code></td></tr>
+          <tr><td>Jan</td><td>Open <strong>Settings &gt; Local API Server</strong> and start the server. If it requires a key, enter that same key in LocDoctor.</td><td><code>http://127.0.0.1:1337/v1</code><br>LocDoctor also checks port <code>6767</code>.</td></tr>
+          <tr><td>GPT4All</td><td>Open <strong>Settings &gt; Application &gt; Advanced</strong> and enable the Local API Server. Load a text model.</td><td><code>http://127.0.0.1:4891/v1</code></td></tr>
+        </tbody></table></div>
+        <p class="small">Use the address shown by your application if you changed its port. LocDoctor asks local servers for their model lists and also checks saved local connections. It does not scan your disks or need your installation folder.</p>
+        <p class="reference-links">Official setup guides: <a href="https://docs.ollama.com/quickstart">Ollama</a><a href="https://lmstudio.ai/docs/developer/core/server">LM Studio</a><a href="https://jan.ai/docs/local-api">Jan</a><a href="https://docs.gpt4all.io/gpt4all_api_server/home.html">GPT4All</a></p>
+        <h3>Another application or a custom port</h3>
+        <p>Use <strong>Other application</strong> or <strong>Other service / My server</strong> in the connection settings. Enter its <strong>API address</strong>, choose <strong>Ollama</strong> or <strong>OpenAI compatible</strong> as the API format, and enter the exact model name. A server such as llama.cpp, LocalAI or vLLM can work if its endpoint supports the selected format.</p>
+        <div class="callout"><strong>The first reply can take longer.</strong> A local application may need to load the model into memory. Increase <strong>Response timeout, seconds</strong> in the connection's advanced settings if needed. Available GPU memory, system memory and model size affect speed.</div>
+      </section>
+      <section class="doc-section" id="browser-chat" aria-labelledby="chat-title" data-search="ChatGPT Claude Gemini browser chat subscription clipboard TXT JSON CSV file batch Arabic one language missing reply placeholders tokens copy request load response">
+        <p class="eyebrow">TRANSLATION METHODS</p><h2 id="chat-title">In my chat</h2>
+        <p>Use an AI chat that accepts pasted text or file attachments. You send the request yourself, then bring the reply back to LocDoctor. This method does not require an API key.</p>
+        <ol class="steps"><li>Choose <strong>In my chat</strong>. Read the <strong>Current request</strong> or <strong>First request</strong> label to see which language and part you are working on.</li><li>Click <strong>Download request file</strong>. For your first attempt, choose <strong>TXT: instructions and texts together</strong>.</li><li>Attach the file in your AI chat. Ask it to follow the included instructions and return the complete requested translation response.</li><li>Click <strong>Load reply</strong> to import the reply file. Alternatively, paste the complete JSON reply into the reply field and click <strong>Check reply</strong>, or use <strong>Paste and check reply</strong>.</li><li>Read the preview. If all checks pass, click <strong>Apply translations</strong>. They are saved as drafts.</li><li>Download or copy the next request and repeat until no pending requests remain. Then review the translations.</li></ol>
+        <div class="callout"><strong>One language per request is expected.</strong> Each request contains up to 20 texts for one language. If you selected several languages, the first request covers only one of them. After you apply its reply, LocDoctor advances to the next part or language and updates the label.</div>
+        <h3>Which file format should I use?</h3>
+        <figure class="screenshot"><a href="assets/screens/en/chat-request.png" target="_blank" rel="noopener"><img src="assets/screens/en/chat-request.png" width="1920" height="1080" alt="The chat exchange page shows the current request language, file format and reply controls." loading="lazy"></a><figcaption>The chat request contains one language at a time.</figcaption></figure>
+        <div class="table-scroll"><table><caption>Chat request file formats</caption><thead><tr><th>Format</th><th>Use it for</th><th>What to attach</th></tr></thead><tbody><tr><td>TXT</td><td>The simplest first attempt.</td><td>One file containing instructions and texts.</td></tr><tr><td>JSON</td><td>A chat or tool that works well with structured data.</td><td>The JSON request, including its instructions.</td></tr><tr><td>CSV</td><td>A table you want to inspect or share.</td><td>The CSV and its separate instructions file.</td></tr></tbody></table></div>
+        <p>Reply files can be JSON, TXT containing the complete JSON reply, or CSV with the columns <code>batch</code>, <code>culture</code>, <code>i</code> and <code>t</code>. Use <strong>Copy request</strong> if your chat cannot accept attachments. Sending a file does not remove a chat's context or upload limits.</p>
+        <h3>What does Check reply validate?</h3>
+        <p>LocDoctor checks the request identifier, language, text identifiers and formatting placeholders. Every requested item must appear exactly once. The game texts and glossary must still match the exported request.</p>
+        <p>If you changed the source, translation or glossary after exporting, prepare a new request. If the reply is incomplete or changes a placeholder, ask the chat to correct it. The active request is saved locally in your project so you can continue after reopening the editor.</p>
+      </section>
+      <section class="doc-section" id="api" aria-labelledby="api-title" data-search="API OpenRouter OpenAI Google Gemini Groq custom own server endpoint URL key authentication billing subscription token error connection model ID">
+        <p class="eyebrow">TRANSLATION METHODS</p><h2 id="api-title">Through an API</h2>
+        <p>LocDoctor sends translation requests automatically to the service you configure. Create an API key in that service's account dashboard and check its model availability and billing before starting.</p>
+        <ol class="steps"><li>Choose <strong>Through an API</strong>. Select a service preset such as OpenRouter, OpenAI, Google Gemini or Groq.</li><li>Open <strong>Advanced settings</strong>. Enter your <strong>API key, if required</strong>. For a custom service, select <strong>Other service / My server</strong> and enter the service's documented API address and format.</li><li>Click <strong>Find models</strong> and select one, or enter its exact <strong>Model name in the API</strong> if the service does not list models.</li><li>Enable <strong>Allow sending game texts to this server</strong> for a server outside this computer.</li><li>Click <strong>Check connection</strong> and wait for the short sample translation. Once it succeeds, click <strong>Translate texts</strong>.</li></ol>
+        <h3>Custom service connection</h3>
+        <figure class="screenshot"><a href="assets/screens/en/connection.png" target="_blank" rel="noopener"><img src="assets/screens/en/connection.png" width="1920" height="1080" alt="Connection settings with the API address, format, key and model fields." loading="lazy"></a><figcaption>Use your service's API address and model identifier.</figcaption></figure>
+        <div class="table-scroll"><table><caption>Custom API connection fields</caption><thead><tr><th>Field</th><th>What to enter</th></tr></thead><tbody><tr><td>Connection name</td><td>A name you will recognize, such as Team translation server.</td></tr><tr><td>API address</td><td>The documented API base address, for example <code>https://openrouter.ai/api/v1</code>. A chat website URL will not work.</td></tr><tr><td>API format</td><td>OpenAI compatible for a compatible Chat Completions endpoint, or Ollama for an Ollama endpoint. Unsupported API formats need a separate integration.</td></tr><tr><td>API key</td><td>The key issued by your service or server, if required.</td></tr><tr><td>Model name in the API</td><td>The exact identifier expected by that server. The display name on a website may be different.</td></tr><tr><td>Response timeout, seconds</td><td>A value from 1 to 600. Increase it for a slow model or server.</td></tr></tbody></table></div>
+        <div class="callout"><strong>A chat subscription may not include API access.</strong> If you only have access to a chat website, choose <strong>In my chat</strong>. Automatic translation needs the API access provided by your service.</div>
+        <p class="small">API keys are saved in local user settings under the project's Saved/Config folder. These settings are not encrypted. Keys are excluded from LocDoctor's chat request files, translation history and reports.</p>
+      </section>
+      <section class="doc-section" id="review" aria-labelledby="review-title" data-search="review drafts human manual translation save edit corrected checked status selected filters progress count stop resume">
+        <p class="eyebrow">REVIEW AND SHIP</p><h2 id="review-title">Review translations</h2>
+        <p>AI translations start as <strong>Drafts</strong>. Automatic checks help preserve formatting, but you still need to review meaning, tone and context.</p>
+        <ol class="steps"><li>Open the <strong>Review</strong> step or the <strong>Texts</strong> page. Click <strong>Refresh</strong> if needed.</li><li>Use the language and status filters to narrow the list. The guided review works with your selected translation languages.</li><li>Compare the original and translation. Edit the translation field where a change is needed. Check names, terminology, placeholders, line breaks and any reported issues.</li><li>Select the rows you want to save and click <strong>Save selected translations</strong>.</li><li>Check the translated screens in your game before release.</li></ol>
+        <div class="table-scroll"><table><caption>Translation states</caption><thead><tr><th>Status</th><th>Meaning</th></tr></thead><tbody><tr><td>Untranslated</td><td>No saved translation for this text and language.</td></tr><tr><td>Drafts</td><td>An AI translation is saved and needs review.</td></tr><tr><td>Reviewed</td><td>The translation has been marked as reviewed.</td></tr><tr><td>Human translation</td><td>A human translation is protected from normal automatic replacement.</td></tr><tr><td>Outdated translations</td><td>The source has changed since the translation was made. Review it against the current source.</td></tr></tbody></table></div>
+        <h3>Understand the progress count</h3>
+        <figure class="screenshot"><a href="assets/screens/en/review.png" target="_blank" rel="noopener"><img src="assets/screens/en/review.png" width="1920" height="1080" alt="The review table compares source game text with French translation drafts in an example project." loading="lazy"></a><figcaption>Example game texts translated into French. Review the drafts before release.</figcaption></figure>
+        <p>Progress counts text and language pairs. One source text translated into four languages means four translation tasks. <strong>Processed</strong> shows how many tasks have been handled; inspect the saved results and any reported errors to confirm what succeeded.</p>
+        <p>Stopping automatic translation keeps completed work. Unfinished work can be resumed where the saved task is available. Existing human translations are protected in normal automatic jobs.</p>
+        <h3>Formatting placeholders</h3>
+        <p>Keep variables such as <code>{Player}</code> and <code>{Count}</code>, Rich Text tags and line breaks intact. Chat requests may replace formatting with protected tokens such as <code>⟦LD0⟧</code>; the model must copy those tokens exactly. LocDoctor restores the original formatting when it applies a valid reply.</p>
+        <p>Complex plural and gender expressions require manual review. Translate the text inside each branch without changing the expression's structure.</p>
+      </section>
+      <section class="doc-section" id="glossary-history" aria-labelledby="glossary-title" data-search="glossary terminology names do not translate required translation term save undo history restore backup recovery">
+        <h2 id="glossary-title">Glossary and history</h2>
+        <h3>Keep your terminology consistent</h3>
+        <ol class="steps"><li>Open <strong>Glossary</strong> and click <strong>Add term</strong>.</li><li>Enter a term. Choose <strong>Do not translate</strong> for a name that should stay unchanged, or <strong>Required translation</strong> to set an exact translation.</li><li>Set a translation for the needed languages and choose case matching if appropriate.</li><li>Click <strong>Save glossary</strong> before preparing new requests.</li></ol>
+        <p>For example, keep a character's name unchanged, or give a gameplay term a specific translation in each language. The glossary is included in new translation requests. Changing it can invalidate an already exported chat request.</p>
+        <h3>Restore an earlier change</h3>
+        <p>Open <strong>History</strong>, find the saved batch by target, language and time, and click <strong>Restore</strong>. LocDoctor checks for newer edits before restoring older data. If those edits conflict, review them before trying to restore.</p>
+        <p>If a write was interrupted, the next opening may show <strong>Restore interrupted changes</strong>. Use its <strong>Restore</strong> action to recover the saved originals before continuing.</p>
+      </section>
+      <section class="doc-section" id="prepare-game" aria-labelledby="prepare-title" data-search="compile prepare for game locres preview original language packaging Localizations to Package Internationalization Support runtime FText packaged build fonts">
+        <p class="eyebrow">REVIEW AND SHIP</p><h2 id="prepare-title">Prepare for the game</h2>
+        <p>This step compiles your saved translations into Unreal's localization resources. The finished game uses these resources; LocDoctor's editor interface does not run inside the shipped game.</p>
+        <ol class="steps"><li>Finish reviewing the translations you plan to ship.</li><li>Open <strong>For the game</strong>, select the text target, and click <strong>Prepare for the game</strong>. Wait for <strong>Localization resources compiled</strong>.</li><li>Select a <strong>Preview language</strong>. This updates the project's text sample and localized game text in the editor. Run your game in the editor and check its screens.</li><li>Click <strong>Original language</strong> to end the preview.</li><li>Open <strong>Project Settings &gt; Packaging &gt; Localizations to Package</strong> and include every language you want to ship. Check that the project's internationalization settings support those languages, then test a packaged build.</li></ol>
+        <div class="callout"><strong>Preview changes game text.</strong> It does not translate Unreal Editor's menus or change LocDoctor's interface language. Hardcoded strings also do not change. The game must use the localized FText or String Table entries you collected.</div>
+        <p>Compile again after saving new translations. If a language works in the editor but not in a packaged build, check that its localization resources and culture data were included in the build.</p>
+        <figure class="screenshot"><a href="assets/screens/en/prepare-game.png" target="_blank" rel="noopener"><img src="assets/screens/en/prepare-game.png" width="1920" height="1080" alt="The For the game page with compilation and game language preview controls." loading="lazy"></a><figcaption>Compile the saved translations, then test the game in each language.</figcaption></figure>
+        <p>If characters appear as squares or are missing, use <strong>Tools &gt; Fonts</strong> and check your game's font assets and fallback fonts for that language.</p>
+      </section>
+      <section class="doc-section" id="tools" aria-labelledby="tools-title" data-search="tools project check audit fonts missing glyphs import export CSV PO XLIFF Excel XLSX JSON report translators conflicts">
+        <h2 id="tools-title">Tools and file exchange</h2>
+        <h3>Project check</h3>
+        <p>Open <strong>Tools &gt; Project check</strong> and run a check. Review the reported locations for text patterns that can prevent localization, such as hardcoded strings, culture invariant text, conflicting keys or phrases assembled from fragments. The first check can take longer while Unreal loads assets.</p>
+        <h3>Fonts</h3>
+        <p>Open <strong>Tools &gt; Fonts</strong> to check whether your selected game fonts contain the characters in your translations. Review missing characters and incomplete checks, then verify the result on actual game screens.</p>
+        <h3>Work with a translator</h3>
+        <p>Open <strong>Tools &gt; Import and export</strong> to exchange translations through <strong>CSV</strong> or <strong>PO</strong> files.</p>
+        <ol class="steps"><li>Export the selected target and language in the required format.</li><li>Let the translator edit the translation values while keeping text identifiers, source values and placeholders intact.</li><li>Import the returned file and review the proposed changes.</li><li>Resolve conflicts by choosing <strong>Keep project translations</strong> or <strong>Use file translations</strong>, then click <strong>Save imported translations</strong>.</li></ol>
+        <p class="small">Chat request CSV and translator exchange CSV serve different workflows. Import a chat response through <strong>In my chat &gt; Load reply</strong>. Spreadsheet XLSX and XLIFF are not supported in this version.</p>
+      </section>
+      <section class="doc-section" id="troubleshooting" aria-labelledby="troubleshooting-title" data-search="error help failed no models no texts disabled button wrong language API timeout 401 403 429 proxy JSON placeholders preview packaged cannot find plugin">
+        <h2 id="troubleshooting-title">Troubleshooting</h2>
+        <details class="qa"><summary>LocDoctor is missing from Tools</summary><p>Open <strong>Edit &gt; Plugins</strong>, search for LocDoctor and enable it. Restart the editor. If it is missing from the plugin list, check the installation folder and use the package for your engine version. For a source-only package, install Unreal's compatible C++ build tools and build the editor target.</p></details>
+        <details class="qa"><summary>No texts were collected</summary><p>Save your game assets, check the text target's gather folder, and collect texts again. Texts must use localizable FText or String Tables and be included in Unreal's gather configuration. Run <strong>Tools &gt; Project check</strong> to inspect hardcoded and nonlocalizable strings.</p></details>
+        <details class="qa"><summary>Translate texts is not available</summary><p>Choose at least one translation language and collect texts. For automatic methods, select a model and complete <strong>Check connection</strong> first. If there are no pending texts, use <strong>Texts</strong> to edit existing translations, or collect new texts and select another language.</p></details>
+        <details class="qa"><summary>The local model list is empty</summary><p>Keep your model application open, enable its local API server, and install or load a text generation model. Check its API address and port. For a custom server, enter the exact model name in advanced settings. An application being installed does not mean that its API server is running.</p></details>
+        <details class="qa"><summary>Check connection times out</summary><p>Allow time for a local model to load, close other applications using GPU memory, or use a smaller model. Increase <strong>Response timeout, seconds</strong> in the connection settings. If the server never responds, check its address, port and whether a system proxy is redirecting localhost requests.</p></details>
+        <details class="qa"><summary>The API returns 401 or 403</summary><p>Check that the key belongs to the selected service, is still valid, and has the required model access. For a local server with authentication, use the key from that application's API server settings.</p></details>
+        <details class="qa"><summary>The API returns 429 or a model error</summary><p>Wait before trying again or select another available model. Check the service's account limits and model availability. A successful model list request does not guarantee that the service can generate a translation.</p></details>
+        <details class="qa"><summary>The chat request contains only one of my languages</summary><p>This is expected. Each request contains one language and up to 20 texts. Load, check and apply the reply, then prepare the next request. LocDoctor displays the current or next language above the file controls.</p></details>
+        <details class="qa"><summary>My chat reply was rejected</summary><p>Use the complete response for the active request. Ask the chat to return every requested item exactly once, keep the batch and culture values unchanged, and preserve every placeholder. If you edited project texts or the glossary after exporting, create a new request.</p></details>
+        <details class="qa"><summary>Changing Preview language does not change the game</summary><p>Save your translations and click <strong>Prepare for the game</strong> first. Confirm that the preview language has translations in the chosen target. Preview affects localized game text, not Unreal Editor menus. Hardcoded strings and text that was not collected will not change.</p></details>
+        <details class="qa"><summary>A language is missing in the packaged game</summary><p>Compile the latest saved translations. Include that language in <strong>Project Settings &gt; Packaging &gt; Localizations to Package</strong> and use internationalization settings that contain its culture data. Test a newly packaged build.</p></details>
+        <details class="qa"><summary>Translated characters appear as squares</summary><p>Check your game's font and fallback fonts for the affected language. Use <strong>Tools &gt; Fonts</strong> to inspect character coverage, then test the actual widgets and game screens.</p></details>
+      </section>
+      <section class="doc-section" id="faq" aria-labelledby="faq-title" data-search="FAQ common questions AI internet offline subscriptions installed model human existing translation interface languages platforms runtime keys">
+        <h2 id="faq-title">Common questions</h2>
+        <details class="qa"><summary>Do I need a paid AI subscription?</summary><p>No subscription is included with LocDoctor. Use a local model, your own chat access or your service's API access. Availability, usage limits and any charges depend on the application or service you choose.</p></details>
+        <details class="qa"><summary>Can local translation work without internet?</summary><p>Yes, with a model that is downloaded and runs locally. Application and model downloads may need internet first. A cloud-hosted model still uses its provider even when your application runs on your computer.</p></details>
+        <details class="qa"><summary>Does LocDoctor translate images, voice or subtitles in video?</summary><p>It translates localizable game text collected by Unreal. Image text, audio and video subtitles require their own source text and content workflows.</p></details>
+        <details class="qa"><summary>Does removing a language delete its translations?</summary><p>No. <strong>Remove language</strong> removes it from the text target's language configuration while keeping the saved translation files. Unticking a language only excludes it from the current translation job.</p></details>
+        <details class="qa"><summary>Which interface languages are available?</summary><p>English, Russian, German, French, Spanish, Portuguese (Brazil), Chinese (Simplified), Japanese and Korean. Your game's translation languages are configured separately.</p></details>
+        <details class="qa"><summary>Does the shipped game need LocDoctor or an AI connection?</summary><p>The plugin is used in Unreal Editor. The finished game uses Unreal's compiled localization resources, so playing it does not need the translation model or service.</p></details>
+      </section>
+      <section class="doc-section" id="version" aria-labelledby="version-title" data-search="version release changelog support NexusForgeUE 1.0.0 Unreal 5.7 5.8 Windows">
+        <h2 id="version-title">Version and support</h2>
+        <p>This guide covers <strong>LocDoctor 1.0.0</strong> for <strong>Unreal Engine 5.7 and 5.8 on Windows 64-bit</strong>.</p>
+        <h3>1.0.0</h3><p>Game text translation through local models, browser chat files and compatible APIs. Includes language setup, draft review, glossary, history, localization compilation, project checks, font checks, and CSV / PO exchange.</p>
+        <h3>When reporting a problem</h3>
+        <p>Contact support: <a href="mailto:nexusforgeuesupport@gmail.com">nexusforgeuesupport@gmail.com</a>.</p>
+        <p>Include your Unreal Engine version, LocDoctor version, translation method and exact error message. For connection problems, include the application or service name and model name. A full-size screenshot helps show the current step.</p>
+        <p>Remove API keys and other private information from screenshots and logs before sharing them.</p>
+      </section>
+      <footer class="page-footer"><span>LocDoctor 1.0.0 · NexusForgeUE</span></footer>
+    </main>
+  </div>
+  <dialog id="image-viewer" class="image-viewer" aria-labelledby="image-title"><div class="image-toolbar"><span id="image-title">Screenshot</span><button type="button" id="image-size" aria-pressed="false">Actual size</button><button type="button" id="image-close">Close image</button></div><div class="image-stage"><img id="large-image" alt=""></div></dialog>
+  <noscript><p class="noscript-note">All instructions are available without JavaScript. Use the chapter links to navigate.</p></noscript>
+</body>
+</html>

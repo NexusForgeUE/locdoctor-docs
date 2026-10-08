@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="site-root" content="../">
+  <meta name="description" content="LocDoctor のインストール、ローカルモデル・API・自分のチャットを使った Unreal Engine のゲームテキストの翻訳、リリースに向けた翻訳リソースの準備方法を説明します。">
+  <title>LocDoctor ドキュメント | Unreal Engine</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/locdoctor.svg">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script src="../assets/app.js" defer></script>
+</head>
+<body data-search-one="{count} 件の章が見つかりました。" data-search-many="{count} 件の章が見つかりました。" data-search-empty="該当する章がありません。検索語を短くしてお試しください。">
+  <a class="skip-link" href="#main">ドキュメント本文へ移動</a>
+  <header class="site-header">
+    <a class="brand" href="#overview" aria-label="LocDoctor ドキュメントのホーム"><img src="../assets/locdoctor.svg" alt="" width="38" height="38"><span>LocDoctor</span></a>
+    <span class="header-label">ドキュメント</span>
+    <div class="header-actions"><label class="language-picker"><span class="visually-hidden">ドキュメントの言語</span><select id="doc-locale" aria-label="ドキュメントの言語"><option value="en">English</option><option value="zh-Hans">简体中文</option><option value="ru">Русский</option><option value="es">Español</option><option value="pt-BR">Português (Brasil)</option><option value="de">Deutsch</option><option value="ja" selected>日本語</option><option value="fr">Français</option><option value="ko">한국어</option></select></label><span class="version">1.0.0</span><button class="print-button" type="button" id="print-guide">ガイドを印刷</button><button class="menu-button" type="button" id="menu-toggle" aria-controls="sidebar" aria-expanded="false">メニュー</button></div>
+  </header>
+  <div class="site-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="search-box"><label for="doc-search">このガイドを検索</label><input id="doc-search" type="search" placeholder="例：API キー、プレビュー" autocomplete="off" aria-controls="search-results"><div id="search-results" class="search-results" hidden></div><p class="visually-hidden" id="search-status" role="status"></p></div>
+      <nav aria-label="ドキュメントの章">
+        <p class="nav-heading">はじめに</p>
+        <a href="#overview" aria-current="location">概要</a>
+        <a href="#installation">インストール</a>
+        <a href="#quick-start">初めての翻訳</a>
+        <a href="#languages">言語とゲームテキスト</a>
+        <p class="nav-heading">翻訳方法を選ぶ</p>
+        <a href="#local-models">自分のパソコンで</a>
+        <a href="#browser-chat">自分のチャットで</a>
+        <a href="#api">API 経由で</a>
+        <p class="nav-heading">確認とリリース</p>
+        <a href="#review">翻訳を確認する</a>
+        <a href="#glossary-history">用語集と履歴</a>
+        <a href="#prepare-game">ゲーム用に準備</a>
+        <p class="nav-heading">リファレンス</p>
+        <a href="#tools">ツールとファイル交換</a>
+        <a href="#troubleshooting">トラブルシューティング</a>
+        <a href="#faq">よくある質問</a>
+        <a href="#version">バージョンとサポート</a>
+      </nav>
+      <div class="sidebar-footer">Unreal Engine 5.7 / 5.8<br>64 ビット Windows</div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <section class="doc-section overview" id="overview" aria-labelledby="overview-title" data-search="getting started beginner introduction AI localization">
+        <p class="eyebrow">LOCDOCTOR 1.0.0 ユーザーガイド</p>
+        <h1 id="overview-title">ゲームを翻訳。<br>言葉の仕上がりまで、自分で管理。</h1>
+        <p class="lead">ローカルモデル、自分の AI チャット、または API サービスで Unreal Engine のゲームテキストを翻訳します。エディタで結果を確認し、ゲーム用のリソースを準備しましょう。</p>
+        <div class="intro-actions"><a class="primary-link" href="#quick-start">初めての翻訳を始める</a><a class="secondary-link" href="#installation">LocDoctor をインストール</a></div>
+        <div class="workflow" aria-label="翻訳の 5 ステップ"><span><b>1</b> 言語</span><span><b>2</b> テキスト</span><span><b>3</b> 翻訳</span><span><b>4</b> 確認</span><span><b>5</b> ゲームに適用</span></div>
+        <div class="intro-note"><strong>AI を使うのは初めてですか？</strong>モデルはテキストを翻訳する AI です。API キーを使うと LocDoctor がオンラインサービスに接続できます。すでに AI チャットを利用していれば、キーなしでも始められます。</div>
+        <h2>すでに利用できる方法を選びましょう</h2>
+        <div class="method-cards">
+          <a href="#local-models"><span class="method-symbol" aria-hidden="true">1</span><h3>自分のパソコンで</h3><p>インストール済みのローカルテキストモデルを使います。</p><span>Ollama、LM Studio、Jan、GPT4All</span></a>
+          <a href="#browser-chat"><span class="method-symbol" aria-hidden="true">2</span><h3>自分のチャットで</h3><p>自分のチャットにリクエストファイルを送ります。</p><span>API キーは不要</span></a>
+          <a href="#api"><span class="method-symbol" aria-hidden="true">3</span><h3>API 経由で</h3><p>サービスを使って自動翻訳します。</p><span>サービスが要求する場合は API キーが必要</span></a>
+        </div>
+      </section>
+      <section class="doc-section" id="installation" aria-labelledby="installation-title" data-search="install enable plugin Plugins missing modules compiler Fab zip Windows version">
+        <p class="eyebrow">はじめに</p><h2 id="installation-title">インストール</h2>
+        <p>LocDoctor 1.0.0 は 64 ビット Windows 上の Unreal Engine 5.7 と 5.8 に対応しています。エンジンのバージョンに合ったパッケージを使ってください。</p>
+        <h3>Fab からインストール</h3>
+        <p>Epic Games Launcher の Fab ライブラリから、使用するエンジン向けのプラグインをインストールします。プロジェクトを開き、必要に応じて <strong>Edit &gt; Plugins</strong> で <strong>LocDoctor</strong> を有効にし、エディタを再起動してください。</p>
+        <h3>ZIP からインストール</h3>
+        <ol class="steps"><li>Unreal Editor を閉じます。</li><li><code>LocDoctor.uplugin</code> が <code>&lt;YourProject&gt;/Plugins/LocDoctor/</code> の直下に置かれるように展開します。ZIP に <code>LocDoctor</code> フォルダが含まれている場合は、そのフォルダを <code>Plugins</code> 内に置いてください。</li><li>プロジェクトを開きます。必要に応じて <strong>Edit &gt; Plugins</strong> で <strong>LocDoctor</strong> を有効にし、エディタを再起動します。</li><li><strong>Tools &gt; LocDoctor</strong> を開きます。</li></ol>
+        <pre><code>YourProject/
+  YourProject.uproject
+  Plugins/
+    LocDoctor/
+      LocDoctor.uplugin
+      Resources/
+      Source/</code></pre>
+        <p class="small">コンパイル済みファイルを含むパッケージには Binaries フォルダもあります。ソースコードのみのパッケージでは、エディタモジュールのビルドに Unreal と互換性のある C++ ビルドツールが必要です。</p>
+      </section>
+      <section class="doc-section" id="quick-start" aria-labelledby="quick-start-title" data-search="start tutorial first translation collect texts connection drafts setup wizard">
+        <p class="eyebrow">はじめに</p><h2 id="quick-start-title">初めての翻訳</h2>
+        <p>まずは 1 言語と少量のゲームテキストで試してください。このガイドのプラグインのボタン名は、ドキュメントの言語に合わせています。Unreal Editor 自体のメニュー名は英語で示しています。</p>
+        <ol class="steps"><li><strong>言語を選びます。</strong><strong>Tools &gt; LocDoctor</strong> を開きます。ゲームの原文の言語と、少なくとも 1 つの翻訳先を選びます。初回は <strong>設定を作成して続行</strong> をクリックしてください。別のアセットフォルダやローカライズターゲットが必要でなければ、詳細設定は初期値のままで構いません。</li><li><strong>テキストを収集します。</strong><strong>テキスト</strong> ステップで <strong>テキストを収集</strong> をクリックします。Unreal に求められた場合は、変更したゲームアセットを保存してください。プロジェクトの概要に必要なテキストが含まれているか確認します。</li><li><strong>翻訳方法を選びます。</strong><a href="#local-models">自分のパソコンで</a>、<a href="#browser-chat">自分のチャットで</a>、または <a href="#api">API 経由で</a> を使います。自動翻訳ではモデルを選択し、<strong>接続を確認</strong> をクリックして短い試験翻訳を行います。成功すると、メインボタンが <strong>テキストを翻訳</strong> に変わります。</li><li><strong>結果を確認します。</strong>AI 翻訳は下書きとして保存されます。<strong>確認</strong> ステップで各翻訳を読み、必要に応じて修正してから、選択した行を保存してください。</li><li><strong>ゲーム用に準備します。</strong><strong>ゲームに適用</strong> で <strong>ゲーム用に準備</strong> をクリックします。各言語でゲームをテストし、<a href="#prepare-game">パッケージ設定</a> に対象の言語を含めてください。</li></ol>
+        <figure class="screenshot"><a href="../assets/screens/ja/first-run.png" target="_blank" rel="noopener" aria-label="設定画面のスクリーンショットをフルサイズで開く"><img src="../assets/screens/ja/first-run.png" width="1920" height="1080" alt="LocDoctor の初回設定画面。原文の言語と翻訳先を選択できます。" loading="lazy"></a><figcaption>Unreal Editor での初回設定。クリックすると Full HD 画像を開きます。</figcaption></figure>
+      </section>
+      <section class="doc-section" id="languages" aria-labelledby="languages-title" data-search="source original target language add remove FText FString String Table localization gather empty Chinese English Spanish">
+        <h2 id="languages-title">言語とゲームテキスト</h2>
+        <h3>原文の言語、翻訳先、表示言語</h3>
+        <ul><li><strong>原文の言語</strong>：ゲームの原文が書かれている言語です。</li><li><strong>翻訳先</strong>：現在の翻訳ジョブで処理する言語です。チェックを外すと、その言語を今回のジョブから除外できます。</li><li><strong>表示言語</strong>：LocDoctor 上部の選択欄です。プラグインの表示言語だけを変更します。初期設定は英語です。</li></ul>
+        <p>ローカライズターゲットは通常 <strong>Game</strong> という名前で、一連のテキストに対する Unreal のローカライズ設定を管理します。プロジェクトに複数ある場合は、翻訳するターゲットを選んでください。</p>
+        <h3>言語の追加と削除</h3>
+        <figure class="screenshot"><a href="../assets/screens/ja/languages.png" target="_blank" rel="noopener"><img src="../assets/screens/ja/languages.png" width="1920" height="1080" alt="言語ステップ。翻訳先の選択、言語の追加と削除ができます。" loading="lazy"></a><figcaption>作業する言語を選びましょう。</figcaption></figure>
+        <p>最初に、よく使われる 12 の翻訳先が表示されます。<strong>言語を追加</strong> では、名前や Unreal のカルチャコードから別の言語を検索できます。<strong>言語を削除</strong> はターゲットの設定から言語を削除します。翻訳ファイルは保持されるので、後から言語を追加し直せます。</p>
+        <h3>どのテキストを翻訳できますか？</h3>
+        <p>LocDoctor は、Unreal のローカライズシステムで収集した、ローカライズ可能な <code>FText</code> と <strong>String Tables</strong> を扱います。通常の <code>FString</code> や culture invariant に設定したテキストは自動ではローカライズできません。<strong>ツール</strong> &gt; <strong>プロジェクト確認</strong> でこれらを確認できます。</p>
+        <div class="callout"><strong>テキスト識別子を維持してください。</strong>ゲームアセットやコードで原文を編集したら、もう一度テキストを収集します。新規または変更されたテキストには再翻訳が必要な場合があります。</div>
+      </section>
+      <section class="doc-section" id="local-models" aria-labelledby="local-title" data-search="Ollama LM Studio Jan GPT4All local model server port GPU RAM memory installation discover custom llama.cpp LocalAI vLLM">
+        <p class="eyebrow">翻訳方法</p><h2 id="local-title">自分のパソコンで</h2>
+        <p>パソコン上のアプリケーションで、ダウンロード済みのテキストモデルを使います。LocDoctor はそのアプリの API サーバーに接続します。プラグインがアプリをインストールしたり、モデルをダウンロードしたりすることはありません。</p>
+        <ol class="steps"><li>使いたいモデルアプリをインストールします。パソコンのメモリで動作し、必要な翻訳先に対応したテキスト生成モデルをダウンロードしてください。</li><li>アプリを起動し、ローカル API サーバーを有効にします。翻訳中はアプリを起動したままにしてください。</li><li>LocDoctor で <strong>自分のパソコンで</strong> を選び、<strong>モデルを選択</strong> をクリックします。<strong>モデルを検索</strong> で一覧を更新できます。</li><li>モデルを選択します。テストがまだ始まっていなければ <strong>接続を確認</strong> をクリックし、短い試験翻訳が終わるまで待ちます。</li><li>接続の準備ができたら <strong>テキストを翻訳</strong> をクリックします。</li></ol>
+        <h3>ローカルアプリを設定する</h3>
+        <div class="table-scroll"><table><caption>ローカルアプリの設定と、LocDoctor が確認する既定のアドレス</caption><thead><tr><th>アプリ</th><th>起動する機能</th><th>既定の API アドレス</th></tr></thead><tbody>
+          <tr><td>Ollama</td><td>ダウンロード済みのローカルテキストモデルを用意し、Ollama を開きます。通常はアプリの起動とともにローカルサーバーが起動します。</td><td><code>http://127.0.0.1:11434</code></td></tr>
+          <tr><td>LM Studio</td><td><strong>Developer</strong> を開き、API サーバーを起動します。そのサーバーから利用できるテキストモデルを用意してください。</td><td><code>http://127.0.0.1:1234/v1</code></td></tr>
+          <tr><td>Jan</td><td><strong>Settings &gt; Local API Server</strong> を開き、サーバーを起動します。キーが必要な場合は、同じキーを LocDoctor に入力してください。</td><td><code>http://127.0.0.1:1337/v1</code><br>LocDoctor はポート <code>6767</code> も確認します。</td></tr>
+          <tr><td>GPT4All</td><td><strong>Settings &gt; Application &gt; Advanced</strong> を開き、Local API Server を有効にします。テキストモデルを読み込んでください。</td><td><code>http://127.0.0.1:4891/v1</code></td></tr>
+        </tbody></table></div>
+        <p class="small">ポートを変更した場合は、アプリに表示されるアドレスを使ってください。LocDoctor はローカルサーバーにモデル一覧を問い合わせ、保存済みのローカル接続も確認します。ディスクのスキャンやインストールフォルダの指定は不要です。</p>
+        <p class="reference-links">公式の設定ガイド：<a href="https://docs.ollama.com/quickstart">Ollama</a><a href="https://lmstudio.ai/docs/developer/core/server">LM Studio</a><a href="https://jan.ai/docs/local-api">Jan</a><a href="https://docs.gpt4all.io/gpt4all_api_server/home.html">GPT4All</a></p>
+        <h3>別のアプリや独自のポートを使う</h3>
+        <p>接続設定で <strong>その他のアプリ</strong> または <strong>その他のサービス / 自分のサーバー</strong> を選びます。<strong>API アドレス</strong> を入力し、API 形式に <strong>Ollama</strong> または <strong>OpenAI 互換</strong> を選択して、正確なモデル名を入力します。llama.cpp、LocalAI、vLLM なども、エンドポイントが選択した形式に対応していれば利用できます。</p>
+        <div class="callout"><strong>最初の応答には時間がかかる場合があります。</strong>ローカルアプリは、モデルをメモリに読み込む必要があることがあります。必要に応じて接続の詳細設定で <strong>応答の待ち時間（秒）</strong> を増やしてください。使用可能な GPU メモリ、システムメモリ、モデルの大きさが速度に影響します。</div>
+      </section>
+      <section class="doc-section" id="browser-chat" aria-labelledby="chat-title" data-search="ChatGPT Claude Gemini browser chat subscription clipboard TXT JSON CSV file batch Arabic one language missing reply placeholders tokens copy request load response">
+        <p class="eyebrow">翻訳方法</p><h2 id="chat-title">自分のチャットで</h2>
+        <p>テキストの貼り付けや添付ファイルに対応した AI チャットを使います。自分でリクエストを送り、返答を LocDoctor に戻します。この方法では API キーは不要です。</p>
+        <ol class="steps"><li><strong>自分のチャットで</strong> を選びます。<strong>現在のリクエスト</strong> または <strong>最初のリクエスト</strong> に、処理する言語とリクエストの区分が表示されます。</li><li><strong>チャット用ファイルをダウンロード</strong> をクリックします。初めて試す場合は <strong>TXT：手順とテキストをまとめる</strong> を選んでください。</li><li>AI チャットにファイルを添付します。ファイル内の指示に従い、要求された翻訳をすべて含む返答を返すように依頼してください。</li><li><strong>回答を読み込む</strong> で返答ファイルを読み込みます。代わりに、完全な JSON 返答を入力欄に貼り付けて <strong>回答を検証</strong> をクリックするか、<strong>返答を貼り付けて確認</strong> を使うこともできます。</li><li>プレビューを読みます。すべての確認に通ったら <strong>翻訳を適用</strong> をクリックしてください。翻訳は下書きとして保存されます。</li><li>次のリクエストをダウンロードまたはコピーし、未処理のリクエストがなくなるまで繰り返します。その後、翻訳を確認してください。</li></ol>
+        <div class="callout"><strong>リクエストに 1 言語しか含まれないのは正常です。</strong>各リクエストには、1 言語につき最大 20 件のテキストが含まれます。複数の言語を選んでも、最初のリクエストはそのうち 1 つだけを扱います。返答を適用すると、次の区分または言語に進み、表示が更新されます。</div>
+        <h3>どのファイル形式を使えばよいですか？</h3>
+        <figure class="screenshot"><a href="../assets/screens/ja/chat-request.png" target="_blank" rel="noopener"><img src="../assets/screens/ja/chat-request.png" width="1920" height="1080" alt="チャット交換ページには、現在のリクエストの言語、ファイル形式、返答の操作が表示されます。" loading="lazy"></a><figcaption>チャットリクエストは 1 回に 1 言語を扱います。</figcaption></figure>
+        <div class="table-scroll"><table><caption>チャットリクエストのファイル形式</caption><thead><tr><th>形式</th><th>適した用途</th><th>添付するもの</th></tr></thead><tbody><tr><td>TXT</td><td>初めて簡単に試す場合。</td><td>指示とテキストをまとめた 1 つのファイル。</td></tr><tr><td>JSON</td><td>構造化データを扱えるチャットやツール。</td><td>指示を含む JSON リクエスト。</td></tr><tr><td>CSV</td><td>表として確認したり共有したりする場合。</td><td>CSV と、別ファイルの指示。</td></tr></tbody></table></div>
+        <p>返答ファイルには、JSON、完全な JSON 返答を含む TXT、または <code>batch</code>、<code>culture</code>、<code>i</code>、<code>t</code> 列を持つ CSV を使えます。チャットが添付に対応していない場合は <strong>リクエストをコピー</strong> を使ってください。ファイルで送っても、チャットのコンテキストやアップロードの制限はなくなりません。</p>
+        <h3>返答の確認では何を検証しますか？</h3>
+        <p>LocDoctor はリクエスト識別子、言語、テキスト識別子、書式のプレースホルダーを確認します。要求した各項目が、重複なく 1 回ずつ含まれている必要があります。ゲームテキストと用語集も、エクスポート時の内容と一致していなければなりません。</p>
+        <p>エクスポート後に原文、翻訳、用語集を変更した場合は、新しいリクエストを作成してください。返答が不完全だったり、プレースホルダーが変更されたりしている場合は、チャットに修正を依頼します。現在のリクエストはプロジェクトにローカル保存されるので、エディタを開き直しても続けられます。</p>
+      </section>
+      <section class="doc-section" id="api" aria-labelledby="api-title" data-search="API OpenRouter OpenAI Google Gemini Groq custom own server endpoint URL key authentication billing subscription token error connection model ID">
+        <p class="eyebrow">翻訳方法</p><h2 id="api-title">API 経由で</h2>
+        <p>LocDoctor は設定したサービスに翻訳リクエストを自動で送ります。そのサービスのアカウント画面で API キーを作成し、モデルの利用可否と料金を確認してから始めてください。</p>
+        <ol class="steps"><li><strong>API 経由で</strong> を選びます。OpenRouter、OpenAI、Google Gemini、Groq などのサービス設定を選択します。</li><li><strong>詳細設定</strong> を開き、<strong>API キー（必要な場合）</strong> を入力します。独自のサービスでは <strong>その他のサービス / 自分のサーバー</strong> を選び、サービスの説明にある API アドレスと形式を指定してください。</li><li><strong>モデルを検索</strong> をクリックしてモデルを選びます。一覧が提供されない場合は、正確な <strong>API 上のモデル名</strong> を入力してください。</li><li>このパソコン以外のサーバーに接続する場合は、<strong>このサーバーへのゲームテキスト送信を許可</strong> を有効にします。</li><li><strong>接続を確認</strong> をクリックし、短い試験翻訳を待ちます。成功したら <strong>テキストを翻訳</strong> をクリックしてください。</li></ol>
+        <h3>独自のサービスへの接続</h3>
+        <figure class="screenshot"><a href="../assets/screens/ja/connection.png" target="_blank" rel="noopener"><img src="../assets/screens/ja/connection.png" width="1920" height="1080" alt="API アドレス、形式、キー、モデルの入力欄を含む接続設定。" loading="lazy"></a><figcaption>サービスの API アドレスとモデル識別子を使ってください。</figcaption></figure>
+        <div class="table-scroll"><table><caption>独自の API 接続の設定項目</caption><thead><tr><th>項目</th><th>入力する内容</th></tr></thead><tbody><tr><td>接続名</td><td>「チームの翻訳サーバー」など、判別しやすい名前です。</td></tr><tr><td>API アドレス</td><td>サービスの説明にある API のベースアドレスです。例：<code>https://openrouter.ai/api/v1</code>。チャットサイトの URL では接続できません。</td></tr><tr><td>API 形式</td><td>互換性のある Chat Completions エンドポイントには OpenAI 互換を、Ollama のエンドポイントには Ollama を選びます。未対応の API 形式には別途連携機能が必要です。</td></tr><tr><td>API キー</td><td>必要な場合に、サービスまたはサーバーが発行したキーを入力します。</td></tr><tr><td>API 上のモデル名</td><td>サーバーが要求する正確な識別子です。ウェブサイトの表示名とは異なる場合があります。</td></tr><tr><td>応答の待ち時間（秒）</td><td>1 から 600 までの値です。モデルやサーバーが遅い場合は増やしてください。</td></tr></tbody></table></div>
+        <div class="callout"><strong>チャットの有料契約に API 利用権が含まれるとは限りません。</strong>チャットサイトだけを利用できる場合は <strong>自分のチャットで</strong> を選んでください。自動翻訳にはサービスの API 利用権が必要です。</div>
+        <p class="small">API キーは、プロジェクトの Saved/Config フォルダ内のローカルユーザー設定に保存されます。この設定は暗号化されていません。キーは LocDoctor のチャットリクエストファイル、翻訳履歴、レポートには含まれません。</p>
+      </section>
+      <section class="doc-section" id="review" aria-labelledby="review-title" data-search="review drafts human manual translation save edit corrected checked status selected filters progress count stop resume">
+        <p class="eyebrow">確認とリリース</p><h2 id="review-title">翻訳を確認する</h2>
+        <p>AI 翻訳は <strong>下書き</strong> として保存されます。自動チェックは書式の維持に役立ちますが、意味、文体、文脈は自分で確認する必要があります。</p>
+        <ol class="steps"><li><strong>確認</strong> ステップまたは <strong>テキスト</strong> ページを開きます。必要に応じて <strong>更新</strong> をクリックしてください。</li><li>言語と状態のフィルターで一覧を絞り込みます。ガイド付きの確認では、選択した翻訳先を表示します。</li><li>原文と翻訳を比べ、必要な箇所を翻訳欄で修正します。名前、用語、プレースホルダー、改行、報告された問題を確認してください。</li><li>保存する行を選び、<strong>選択した翻訳を保存</strong> をクリックします。</li><li>リリース前に、ゲーム内で翻訳された画面を確認してください。</li></ol>
+        <div class="table-scroll"><table><caption>翻訳の状態</caption><thead><tr><th>状態</th><th>意味</th></tr></thead><tbody><tr><td>未翻訳</td><td>このテキストと言語には、保存された翻訳がありません。</td></tr><tr><td>下書き</td><td>AI 翻訳が保存され、確認を待っています。</td></tr><tr><td>確認済み</td><td>確認済みとしてマークされた翻訳です。</td></tr><tr><td>手動翻訳</td><td>人による翻訳は、通常の自動置き換えから保護されます。</td></tr><tr><td>古い翻訳</td><td>翻訳後に原文が変更されています。現在の原文と比べて確認してください。</td></tr></tbody></table></div>
+        <h3>進捗件数の見方</h3>
+        <figure class="screenshot"><a href="../assets/screens/ja/review.png" target="_blank" rel="noopener"><img src="../assets/screens/ja/review.png" width="1920" height="1080" alt="サンプルプロジェクトの原文と、フランス語の翻訳下書きを比較する確認表。" loading="lazy"></a><figcaption>ゲームテキストのフランス語訳の例です。リリース前に下書きを確認してください。</figcaption></figure>
+        <p>進捗はテキストと言語の組み合わせで数えます。1 件の原文を 4 言語に訳す場合、翻訳タスクは 4 件です。<strong>処理済み</strong> は処理された件数を示します。保存された結果とエラーを確認し、どのタスクが成功したか判断してください。</p>
+        <p>自動翻訳を停止しても、完了した結果は保持されます。保存されたタスクが利用できる場合は、未完了の作業を再開できます。通常の自動ジョブでは、既存の人による翻訳が保護されます。</p>
+        <h3>書式のプレースホルダー</h3>
+        <p><code>{Player}</code>、<code>{Count}</code> などの変数、Rich Text タグ、改行を維持してください。チャットリクエストでは、書式が <code>⟦LD0⟧</code> などの保護されたトークンに置き換わる場合があります。モデルはこれを正確にコピーする必要があります。LocDoctor は有効な返答を適用するときに、元の書式を復元します。</p>
+        <p>複雑な複数形や性別の式は手作業での確認が必要です。式の構造を変えず、各分岐内のテキストを翻訳してください。</p>
+      </section>
+      <section class="doc-section" id="glossary-history" aria-labelledby="glossary-title" data-search="glossary terminology names do not translate required translation term save undo history restore backup recovery">
+        <h2 id="glossary-title">用語集と履歴</h2>
+        <h3>用語を統一する</h3>
+        <ol class="steps"><li><strong>用語集</strong> を開き、<strong>追加</strong> をクリックします。</li><li>用語を入力します。名前をそのまま残す場合は <strong>翻訳しない</strong>、決まった訳を指定する場合は <strong>指定の訳語</strong> を選びます。</li><li>必要な言語の訳を設定し、必要に応じて大文字と小文字を区別する設定を有効にします。</li><li>新しいリクエストを作る前に <strong>保存</strong> をクリックしてください。</li></ol>
+        <p>例えば、キャラクター名を変えずに残したり、ゲーム用語の訳を言語ごとに統一したりできます。用語集は新しい翻訳リクエストに含まれます。変更すると、すでにエクスポートしたチャットリクエストが無効になる場合があります。</p>
+        <h3>以前の変更を復元する</h3>
+        <p><strong>履歴</strong> を開き、ターゲット、言語、時刻から保存済みのバッチを探して <strong>復元</strong> をクリックします。古いデータを復元する前に、LocDoctor は新しい編集がないか確認します。競合する場合は、先にその編集内容を確認してください。</p>
+        <p>書き込みが中断された場合、次回の起動時に <strong>中断された変更を復元</strong> が表示されることがあります。<strong>復元</strong> でバックアップした元のファイルを復元してから続けてください。</p>
+      </section>
+      <section class="doc-section" id="prepare-game" aria-labelledby="prepare-title" data-search="compile prepare for game locres preview original language packaging Localizations to Package Internationalization Support runtime FText packaged build fonts">
+        <p class="eyebrow">確認とリリース</p><h2 id="prepare-title">ゲーム用に準備</h2>
+        <p>このステップでは、保存した翻訳を Unreal のローカライズリソースにコンパイルします。完成したゲームはこのリソースを使用します。配布するゲーム内で LocDoctor のエディタ画面が動くことはありません。</p>
+        <ol class="steps"><li>リリースに含める翻訳の確認を終えてください。</li><li><strong>ゲームに適用</strong> を開き、ローカライズターゲットを選び、<strong>ゲーム用に準備</strong> をクリックします。<strong>ローカライズリソースをコンパイルしました</strong> が表示されるまで待ちます。</li><li><strong>プレビュー言語</strong> を選びます。プロジェクトのテキスト例と、エディタ内のローカライズされたゲームテキストが更新されます。エディタでゲームを起動し、画面を確認してください。</li><li><strong>元の言語</strong> をクリックするとプレビューを終了できます。</li><li><strong>Project Settings &gt; Packaging &gt; Localizations to Package</strong> を開き、リリースするすべての言語を含めてください。国際化の設定にそれらの言語のデータが含まれることを確認し、パッケージ化したビルドをテストします。</li></ol>
+        <div class="callout"><strong>プレビューで変わるのはゲームテキストです。</strong>Unreal Editor のメニューを翻訳したり、LocDoctor の表示言語を変えたりする機能ではありません。直接埋め込まれた通常の文字列も変わりません。ゲームでは、収集したローカライズ可能な FText または String Table エントリを使う必要があります。</div>
+        <p>新しい翻訳を保存したら、再コンパイルしてください。エディタでは表示される言語がパッケージ版で表示されない場合、ローカライズリソースとカルチャデータがビルドに含まれているか確認します。</p>
+        <figure class="screenshot"><a href="../assets/screens/ja/prepare-game.png" target="_blank" rel="noopener"><img src="../assets/screens/ja/prepare-game.png" width="1920" height="1080" alt="ゲーム用の準備ページ。コンパイルとゲーム言語のプレビューを操作できます。" loading="lazy"></a><figcaption>保存した翻訳をコンパイルし、各言語でゲームをテストしてください。</figcaption></figure>
+        <p>文字が四角で表示されたり欠けたりする場合は、<strong>ツール</strong> &gt; <strong>フォント</strong> を使い、ゲームのフォントアセットと対象言語のフォールバックフォントを確認してください。</p>
+      </section>
+      <section class="doc-section" id="tools" aria-labelledby="tools-title" data-search="tools project check audit fonts missing glyphs import export CSV PO XLIFF Excel XLSX JSON report translators conflicts">
+        <h2 id="tools-title">ツールとファイル交換</h2>
+        <h3>プロジェクト確認</h3>
+        <p><strong>ツール</strong> &gt; <strong>プロジェクト確認</strong> でチェックを実行します。報告された箇所を見て、固定文字列、culture invariant テキスト、キーの競合、断片をつないだ文など、ローカライズの妨げになるパターンを確認します。初回は Unreal がアセットを読み込むため、時間がかかる場合があります。</p>
+        <h3>フォント</h3>
+        <p><strong>ツール</strong> &gt; <strong>フォント</strong> で、選択したゲームフォントに翻訳の文字が含まれているか確認します。欠けている文字と未完了のチェックを確認し、実際のゲーム画面で検証してください。</p>
+        <h3>翻訳者と作業する</h3>
+        <p><strong>ツール</strong> &gt; <strong>インポートとエクスポート</strong> で、<strong>CSV</strong> または <strong>PO</strong> ファイルを使って翻訳を交換できます。</p>
+        <ol class="steps"><li>選択したターゲットと言語を、必要な形式でエクスポートします。</li><li>翻訳者は訳文だけを編集し、テキスト識別子、原文、プレースホルダーを維持してください。</li><li>返ってきたファイルをインポートし、適用予定の変更を確認します。</li><li><strong>プロジェクトの翻訳を保持</strong> または <strong>ファイルの翻訳を使用</strong> で競合を解決し、<strong>読み込んだ翻訳を保存</strong> をクリックします。</li></ol>
+        <p class="small">チャットリクエスト用 CSV と翻訳者との交換用 CSV は、用途が異なります。チャットの返答は <strong>自分のチャットで</strong> &gt; <strong>回答を読み込む</strong> から読み込んでください。このバージョンは XLSX と XLIFF に対応していません。</p>
+      </section>
+      <section class="doc-section" id="troubleshooting" aria-labelledby="troubleshooting-title" data-search="error help failed no models no texts disabled button wrong language API timeout 401 403 429 proxy JSON placeholders preview packaged cannot find plugin">
+        <h2 id="troubleshooting-title">トラブルシューティング</h2>
+        <details class="qa"><summary>Tools に LocDoctor が表示されない</summary><p><strong>Edit &gt; Plugins</strong> で LocDoctor を検索して有効にし、エディタを再起動してください。プラグイン一覧にもない場合は、インストール先とエンジン向けのパッケージを確認します。ソースのみのパッケージでは、Unreal に対応した C++ ビルドツールをインストールし、エディタターゲットをビルドしてください。</p></details>
+        <details class="qa"><summary>テキストが収集されない</summary><p>ゲームアセットを保存し、ターゲットの収集フォルダを確認して、もう一度収集します。テキストはローカライズ可能な FText または String Tables で、Unreal の収集設定に含まれている必要があります。<strong>ツール</strong> &gt; <strong>プロジェクト確認</strong> で固定文字列やローカライズできない文字列を調べてください。</p></details>
+        <details class="qa"><summary>テキストを翻訳できない</summary><p>少なくとも 1 つの翻訳先を選び、テキストを収集してください。自動翻訳では、モデルを選んで <strong>接続を確認</strong> を先に完了します。未翻訳の作業がない場合は <strong>テキスト</strong> で既存の翻訳を編集するか、新しいテキストを収集して別の言語を選んでください。</p></details>
+        <details class="qa"><summary>ローカルモデル一覧が空</summary><p>モデルアプリを起動したままにし、ローカル API サーバーを有効にして、テキスト生成モデルをインストールまたは読み込んでください。API アドレスとポートを確認します。独自のサーバーでは、詳細設定に正確なモデル名を入力してください。アプリがインストール済みでも、API サーバーが起動しているとは限りません。</p></details>
+        <details class="qa"><summary>接続確認がタイムアウトする</summary><p>モデルの読み込みを待つか、GPU メモリを使う他のアプリを閉じるか、小さいモデルを選んでください。<strong>応答の待ち時間（秒）</strong> を増やします。サーバーが全く応答しない場合は、アドレス、ポート、システムプロキシによる localhost リクエストの転送を確認してください。</p></details>
+        <details class="qa"><summary>API が 401 または 403 を返す</summary><p>キーが選択したサービスのもので、有効期限内かつモデルの利用権を持つか確認してください。認証が必要なローカルサーバーには、そのアプリの API サーバー設定にあるキーを使います。</p></details>
+        <details class="qa"><summary>API が 429 またはモデルエラーを返す</summary><p>時間を置いて再試行するか、別の利用可能なモデルを選んでください。サービスのアカウント上限とモデルの提供状況を確認します。モデル一覧を取得できても、翻訳の生成に成功するとは限りません。</p></details>
+        <details class="qa"><summary>チャットリクエストに選んだ言語が 1 つしかない</summary><p>正常な動作です。リクエストは 1 言語につき最大 20 件です。返答を読み込み、確認して適用したら、次のリクエストを作ってください。ファイル操作欄の上に現在または次の言語が表示されます。</p></details>
+        <details class="qa"><summary>チャットの返答が拒否された</summary><p>現在のリクエストに対する完全な返答を使ってください。すべての項目を重複なく 1 回ずつ返し、batch と culture、すべてのプレースホルダーを維持するようチャットに依頼します。エクスポート後にテキストや用語集を編集した場合は、新しいリクエストを作成してください。</p></details>
+        <details class="qa"><summary>プレビュー言語を変えてもゲームが変わらない</summary><p>翻訳を保存し、先に <strong>ゲーム用に準備</strong> をクリックしてください。選択したターゲットに、プレビュー言語の翻訳があるか確認します。プレビューの対象はローカライズされたゲームテキストであり、Unreal Editor のメニューではありません。通常の文字列や未収集のテキストは変わりません。</p></details>
+        <details class="qa"><summary>パッケージ化したゲームに言語がない</summary><p>最新の保存済み翻訳をコンパイルしてください。<strong>Project Settings &gt; Packaging &gt; Localizations to Package</strong> に言語を含め、国際化の設定にそのカルチャデータを含めます。新しくパッケージ化したビルドをテストしてください。</p></details>
+        <details class="qa"><summary>翻訳の文字が四角で表示される</summary><p>ゲームのフォントと、対象言語のフォールバックフォントを確認してください。<strong>ツール</strong> &gt; <strong>フォント</strong> で対応文字を確認し、実際のウィジェットとゲーム画面でテストします。</p></details>
+      </section>
+      <section class="doc-section" id="faq" aria-labelledby="faq-title" data-search="FAQ common questions AI internet offline subscriptions installed model human existing translation interface languages platforms runtime keys">
+        <h2 id="faq-title">よくある質問</h2>
+        <details class="qa"><summary>有料の AI 契約は必要ですか？</summary><p>LocDoctor に AI 契約は含まれません。ローカルモデル、自分のチャット利用権、またはサービスの API 利用権を使ってください。提供状況、利用上限、料金は選択したアプリやサービスによって異なります。</p></details>
+        <details class="qa"><summary>ローカル翻訳はインターネットなしで使えますか？</summary><p>ダウンロード済みのモデルがローカルで動く場合は使えます。アプリやモデルのダウンロードには事前にインターネットが必要な場合があります。クラウド上のモデルは、アプリがパソコン上にあっても提供元へ接続します。</p></details>
+        <details class="qa"><summary>画像、音声、動画内の字幕も翻訳できますか？</summary><p>Unreal が収集した、ローカライズ可能なゲームテキストを翻訳します。画像内の文字、音声、動画の字幕には、それぞれの原文と別の制作工程が必要です。</p></details>
+        <details class="qa"><summary>言語を削除すると翻訳も消えますか？</summary><p>消えません。<strong>言語を削除</strong> はターゲットの言語設定から削除しますが、翻訳ファイルは保持します。チェックを外すだけなら、現在の翻訳ジョブから除外するだけです。</p></details>
+        <details class="qa"><summary>どの表示言語に対応していますか？</summary><p>英語、ロシア語、ドイツ語、フランス語、スペイン語、ポルトガル語（ブラジル）、簡体字中国語、日本語、韓国語です。ゲームの翻訳先は別途設定します。</p></details>
+        <details class="qa"><summary>リリースしたゲームに LocDoctor や AI 接続は必要ですか？</summary><p>プラグインは Unreal Editor で使用します。完成したゲームは Unreal のコンパイル済みローカライズリソースを使うため、プレイ時に翻訳モデルやサービスへの接続は不要です。</p></details>
+      </section>
+      <section class="doc-section" id="version" aria-labelledby="version-title" data-search="version release changelog support NexusForgeUE 1.0.0 Unreal 5.7 5.8 Windows">
+        <h2 id="version-title">バージョンとサポート</h2>
+        <p>このガイドは、<strong>64 ビット Windows 上の Unreal Engine 5.7 および 5.8</strong> 向けの <strong>LocDoctor 1.0.0</strong> を対象としています。</p>
+        <h3>1.0.0</h3><p>ローカルモデル、チャットファイル、互換 API を使ったゲームテキストの翻訳に対応します。言語設定、下書き確認、用語集、履歴、ローカライズのコンパイル、プロジェクト・フォント確認、CSV / PO 交換機能があります。</p>
+        <h3>問題を報告するには</h3>
+        <p>サポートへの連絡先：<a href="mailto:nexusforgeuesupport@gmail.com">nexusforgeuesupport@gmail.com</a>。</p>
+        <p>Unreal Engine と LocDoctor のバージョン、翻訳方法、正確なエラーメッセージをお知らせください。接続の問題では、アプリやサービスの名前とモデル名も含めてください。フルサイズのスクリーンショットがあると、現在のステップを確認しやすくなります。</p>
+        <p>共有する前に、スクリーンショットやログから API キーなどの個人情報を取り除いてください。</p>
+      </section>
+      <footer class="page-footer"><span>LocDoctor 1.0.0 · NexusForgeUE</span></footer>
+    </main>
+  </div>
+  <dialog id="image-viewer" class="image-viewer" aria-labelledby="image-title"><div class="image-toolbar"><span id="image-title">スクリーンショット</span><button type="button" id="image-size" aria-pressed="false">原寸表示</button><button type="button" id="image-close">画像を閉じる</button></div><div class="image-stage"><img id="large-image" alt=""></div></dialog>
+  <noscript><p class="noscript-note">JavaScript を使わなくても、すべての説明を読めます。章のリンクから移動してください。</p></noscript>
+</body>
+</html>

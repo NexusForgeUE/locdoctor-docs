@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="site-root" content="../">
+  <meta name="description" content="Узнайте, как установить LocDoctor, переводить тексты игры в Unreal Engine с помощью локальной модели, API или своего чата и подготовить переводы к выпуску.">
+  <title>Документация LocDoctor | Unreal Engine</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/locdoctor.svg">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script src="../assets/app.js" defer></script>
+</head>
+<body data-search-one="Найден раздел: {count}." data-search-many="Найдено разделов: {count}." data-search-empty="Разделы не найдены. Попробуйте сократить запрос.">
+  <a class="skip-link" href="#main">Перейти к руководству</a>
+  <header class="site-header">
+    <a class="brand" href="#overview" aria-label="Главная страница документации LocDoctor"><img src="../assets/locdoctor.svg" alt="" width="38" height="38"><span>LocDoctor</span></a>
+    <span class="header-label">Документация</span>
+    <div class="header-actions"><label class="language-picker"><span class="visually-hidden">Язык документации</span><select id="doc-locale" aria-label="Язык документации"><option value="en">English</option><option value="zh-Hans">简体中文</option><option value="ru" selected>Русский</option><option value="es">Español</option><option value="pt-BR">Português (Brasil)</option><option value="de">Deutsch</option><option value="ja">日本語</option><option value="fr">Français</option><option value="ko">한국어</option></select></label><span class="version">1.0.0</span><button class="print-button" type="button" id="print-guide">Распечатать руководство</button><button class="menu-button" type="button" id="menu-toggle" aria-controls="sidebar" aria-expanded="false">Меню</button></div>
+  </header>
+  <div class="site-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="search-box"><label for="doc-search">Поиск по руководству</label><input id="doc-search" type="search" placeholder="Например: ключ API или предпросмотр" autocomplete="off" aria-controls="search-results"><div id="search-results" class="search-results" hidden></div><p class="visually-hidden" id="search-status" role="status"></p></div>
+      <nav aria-label="Разделы руководства">
+        <p class="nav-heading">Начало работы</p>
+        <a href="#overview" aria-current="location">Обзор</a>
+        <a href="#installation">Установка</a>
+        <a href="#quick-start">Ваш первый перевод</a>
+        <a href="#languages">Языки и тексты игры</a>
+        <p class="nav-heading">Выбор способа перевода</p>
+        <a href="#local-models">На компьютере</a>
+        <a href="#browser-chat">В моём чате</a>
+        <a href="#api">Через API</a>
+        <p class="nav-heading">Проверка и выпуск</p>
+        <a href="#review">Проверка переводов</a>
+        <a href="#glossary-history">Словарь и история</a>
+        <a href="#prepare-game">Подготовить для игры</a>
+        <p class="nav-heading">Справочная информация</p>
+        <a href="#tools">Инструменты и обмен файлами</a>
+        <a href="#troubleshooting">Решение проблем</a>
+        <a href="#faq">Частые вопросы</a>
+        <a href="#version">Версия и поддержка</a>
+      </nav>
+      <div class="sidebar-footer">Unreal Engine 5.7 / 5.8<br>64-разрядная Windows</div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <section class="doc-section overview" id="overview" aria-labelledby="overview-title" data-search="getting started beginner introduction AI localization">
+        <p class="eyebrow">РУКОВОДСТВО ПОЛЬЗОВАТЕЛЯ LOCDOCTOR 1.0.0</p>
+        <h1 id="overview-title">Переведите свою игру.<br>Контролируйте каждое слово.</h1>
+        <p class="lead">Переводите тексты игры в Unreal Engine с помощью локальной модели, своего чата с ИИ или сервиса API. Проверьте результат в редакторе и подготовьте переводы для игры.</p>
+        <div class="intro-actions"><a class="primary-link" href="#quick-start">Начать первый перевод</a><a class="secondary-link" href="#installation">Установить LocDoctor</a></div>
+        <div class="workflow" aria-label="Пять этапов перевода"><span><b>1</b> Языки</span><span><b>2</b> Тексты</span><span><b>3</b> Перевод</span><span><b>4</b> Проверка</span><span><b>5</b> Для игры</span></div>
+        <div class="intro-note"><strong>Впервые работаете с ИИ?</strong> Модель переводит ваш текст. Ключ API позволяет LocDoctor подключиться к онлайн-сервису. Если у вас уже есть доступ к чату с ИИ, можно начать без ключа.</div>
+        <h2>Выберите доступный вам способ</h2>
+        <div class="method-cards">
+          <a href="#local-models"><span class="method-symbol" aria-hidden="true">1</span><h3>На компьютере</h3><p>Используйте установленную локальную модель для работы с текстом.</p><span>Ollama, LM Studio, Jan, GPT4All</span></a>
+          <a href="#browser-chat"><span class="method-symbol" aria-hidden="true">2</span><h3>В моём чате</h3><p>Отправьте файл запроса в свой чат.</p><span>Ключ API не нужен</span></a>
+          <a href="#api"><span class="method-symbol" aria-hidden="true">3</span><h3>Через API</h3><p>Переводите автоматически через сервис.</p><span>Ключ API нужен, если его требует сервис</span></a>
+        </div>
+      </section>
+      <section class="doc-section" id="installation" aria-labelledby="installation-title" data-search="install enable plugin Plugins missing modules compiler Fab zip Windows version">
+        <p class="eyebrow">НАЧАЛО РАБОТЫ</p><h2 id="installation-title">Установка</h2>
+        <p>LocDoctor 1.0.0 поддерживает Unreal Engine 5.7 и 5.8 на 64-разрядной Windows. Используйте пакет для своей версии движка.</p>
+        <h3>Установка через Fab</h3>
+        <p>Установите плагин для своей версии движка из библиотеки Fab в Epic Games Launcher. Откройте проект, при необходимости включите <strong>LocDoctor</strong> в меню <strong>Edit &gt; Plugins</strong> и перезапустите редактор.</p>
+        <h3>Установка из ZIP</h3>
+        <ol class="steps"><li>Закройте Unreal Editor.</li><li>Распакуйте пакет так, чтобы <code>LocDoctor.uplugin</code> находился непосредственно в <code>&lt;YourProject&gt;/Plugins/LocDoctor/</code>. Если ZIP уже содержит папку <code>LocDoctor</code>, поместите её в папку <code>Plugins</code>.</li><li>Откройте проект. При необходимости включите <strong>LocDoctor</strong> в меню <strong>Edit &gt; Plugins</strong> и перезапустите редактор.</li><li>Откройте <strong>Tools &gt; LocDoctor</strong>.</li></ol>
+        <pre><code>YourProject/
+  YourProject.uproject
+  Plugins/
+    LocDoctor/
+      LocDoctor.uplugin
+      Resources/
+      Source/</code></pre>
+        <p class="small">Пакет с готовыми бинарными файлами также содержит папку Binaries. Для сборки пакета с исходным кодом Unreal потребуются совместимые инструменты сборки C++.</p>
+      </section>
+      <section class="doc-section" id="quick-start" aria-labelledby="quick-start-title" data-search="start tutorial first translation collect texts connection drafts setup wizard">
+        <p class="eyebrow">НАЧАЛО РАБОТЫ</p><h2 id="quick-start-title">Ваш первый перевод</h2>
+        <p>Начните с одного языка и небольшого набора текстов. Названия кнопок плагина в руководстве соответствуют выбранному языку документации. Названия меню самого Unreal Editor приведены на английском.</p>
+        <ol class="steps"><li><strong>Выберите языки.</strong> Откройте <strong>Tools &gt; LocDoctor</strong>. Укажите язык исходных текстов игры и хотя бы один язык перевода. При первом запуске нажмите <strong>Создать настройки и продолжить</strong>. Оставьте дополнительные настройки по умолчанию, если вам не нужна другая папка ресурсов или группа текстов.</li><li><strong>Соберите тексты.</strong> На этапе <strong>Тексты</strong> нажмите <strong>Собрать тексты</strong>. Сохраните изменённые ресурсы игры, если Unreal предложит это сделать. Проверьте, что в сводке проекта появились нужные тексты.</li><li><strong>Выберите способ перевода.</strong> Используйте <a href="#local-models">На компьютере</a>, <a href="#browser-chat">В моём чате</a> или <a href="#api">Через API</a>. Для автоматического перевода выберите модель и нажмите <strong>Проверить подключение</strong>. Плагин выполнит короткий тестовый перевод. После успешной проверки основная кнопка сменится на <strong>Перевести тексты</strong>.</li><li><strong>Проверьте результат.</strong> Переводы ИИ сохраняются как черновики. На этапе <strong>Проверка</strong> прочитайте каждый перевод, исправьте его при необходимости и сохраните выбранные строки.</li><li><strong>Подготовьте игру.</strong> На этапе <strong>Для игры</strong> нажмите <strong>Подготовить для игры</strong>. Проверьте игру на каждом языке и включите эти языки в <a href="#prepare-game">настройки упаковки</a>.</li></ol>
+        <figure class="screenshot"><a href="../assets/screens/ru/first-run.png" target="_blank" rel="noopener" aria-label="Открыть снимок настройки в полном размере"><img src="../assets/screens/ru/first-run.png" width="1920" height="1080" alt="Первоначальная настройка LocDoctor с выбором языка исходных текстов и языков перевода." loading="lazy"></a><figcaption>Первоначальная настройка в Unreal Editor. Нажмите, чтобы открыть изображение Full HD.</figcaption></figure>
+      </section>
+      <section class="doc-section" id="languages" aria-labelledby="languages-title" data-search="source original target language add remove FText FString String Table localization gather empty Chinese English Spanish">
+        <h2 id="languages-title">Языки и тексты игры</h2>
+        <h3>Исходный язык, языки перевода и язык интерфейса</h3>
+        <ul><li><strong>Язык исходного текста:</strong> язык, на котором написаны исходные тексты вашей игры.</li><li><strong>Перевести на:</strong> языки для текущего задания. Снимите отметку с языка, чтобы исключить его из этого задания.</li><li><strong>Язык интерфейса:</strong> переключатель в верхней части LocDoctor. Он меняет только язык плагина. По умолчанию выбран английский.</li></ul>
+        <p>Группа текстов, обычно с именем <strong>Game</strong>, задаёт настройки локализации набора текстов в Unreal. Если групп несколько, выберите нужную.</p>
+        <h3>Добавление и удаление языка</h3>
+        <figure class="screenshot"><a href="../assets/screens/ru/languages.png" target="_blank" rel="noopener"><img src="../assets/screens/ru/languages.png" width="1920" height="1080" alt="Этап выбора языков с кнопками добавления и удаления." loading="lazy"></a><figcaption>Выберите языки, с которыми будете работать.</figcaption></figure>
+        <p>Сначала предлагаются 12 популярных языков перевода. Нажмите <strong>Добавить язык</strong>, чтобы найти другой язык по названию или коду культуры Unreal. Кнопка <strong>Удалить язык</strong> удаляет язык из настроек группы текстов. Файлы переводов сохраняются, поэтому язык можно добавить снова.</p>
+        <h3>Какие тексты можно переводить?</h3>
+        <p>LocDoctor работает с локализуемыми <code>FText</code> и <strong>String Tables</strong>, собранными системой локализации Unreal. Обычные значения <code>FString</code> и тексты с признаком culture invariant автоматически не локализуются. Найти такие случаи поможет <strong>Инструменты &gt; Проверка проекта</strong>.</p>
+        <div class="callout"><strong>Сохраняйте идентификаторы текстов.</strong> Изменяйте исходный текст в ресурсах игры или коде, затем собирайте тексты заново. Новые и изменённые тексты могут потребовать повторного перевода.</div>
+      </section>
+      <section class="doc-section" id="local-models" aria-labelledby="local-title" data-search="Ollama LM Studio Jan GPT4All local model server port GPU RAM memory installation discover custom llama.cpp LocalAI vLLM">
+        <p class="eyebrow">СПОСОБЫ ПЕРЕВОДА</p><h2 id="local-title">На компьютере</h2>
+        <p>Используйте скачанную текстовую модель в приложении на вашем компьютере. LocDoctor подключается к API-серверу приложения. Сам плагин не устанавливает приложения и не скачивает модели.</p>
+        <ol class="steps"><li>Установите выбранное приложение. Скачайте модель для генерации текста, которой хватит памяти вашего компьютера и которая поддерживает нужные языки.</li><li>Запустите приложение и включите его локальный API-сервер. Оставьте приложение работающим на время перевода.</li><li>В LocDoctor выберите <strong>На компьютере</strong>, затем <strong>Выбрать модель</strong>. Кнопка <strong>Найти модели</strong> обновляет список моделей.</li><li>Выберите модель. Если проверка не началась автоматически, нажмите <strong>Проверить подключение</strong> и дождитесь короткого тестового перевода.</li><li>Когда подключение готово, нажмите <strong>Перевести тексты</strong>.</li></ol>
+        <h3>Настройка локального приложения</h3>
+        <div class="table-scroll"><table><caption>Настройка локальных приложений и стандартные адреса, проверяемые LocDoctor</caption><thead><tr><th>Приложение</th><th>Что запустить</th><th>Стандартный адрес API</th></tr></thead><tbody>
+          <tr><td>Ollama</td><td>Запустите Ollama со скачанной локальной текстовой моделью. Локальный сервер обычно запускается вместе с приложением.</td><td><code>http://127.0.0.1:11434</code></td></tr>
+          <tr><td>LM Studio</td><td>Откройте <strong>Developer</strong> и запустите API-сервер. Предоставьте этому серверу доступ к текстовой модели.</td><td><code>http://127.0.0.1:1234/v1</code></td></tr>
+          <tr><td>Jan</td><td>Откройте <strong>Settings &gt; Local API Server</strong> и запустите сервер. Если сервер требует ключ, введите тот же ключ в LocDoctor.</td><td><code>http://127.0.0.1:1337/v1</code><br>LocDoctor также проверяет порт <code>6767</code>.</td></tr>
+          <tr><td>GPT4All</td><td>Откройте <strong>Settings &gt; Application &gt; Advanced</strong> и включите Local API Server. Загрузите текстовую модель.</td><td><code>http://127.0.0.1:4891/v1</code></td></tr>
+        </tbody></table></div>
+        <p class="small">Если вы меняли порт, используйте адрес из приложения. LocDoctor запрашивает списки моделей у локальных серверов и проверяет сохранённые локальные подключения. Сканировать диски или выбирать папку установки не нужно.</p>
+        <p class="reference-links">Официальные инструкции: <a href="https://docs.ollama.com/quickstart">Ollama</a><a href="https://lmstudio.ai/docs/developer/core/server">LM Studio</a><a href="https://jan.ai/docs/local-api">Jan</a><a href="https://docs.gpt4all.io/gpt4all_api_server/home.html">GPT4All</a></p>
+        <h3>Другое приложение или нестандартный порт</h3>
+        <p>Выберите <strong>Другое приложение</strong> или <strong>Другой сервис / Свой сервер</strong> в настройках подключения. Введите <strong>Адрес API</strong>, выберите <strong>Ollama</strong> или <strong>Совместимый с OpenAI</strong> как формат API и укажите точное имя модели. Серверы llama.cpp, LocalAI и vLLM могут работать, если поддерживают выбранный формат API.</p>
+        <div class="callout"><strong>Первый ответ может занять больше времени.</strong> Приложению нужно загрузить модель в память. При необходимости увеличьте <strong>Время ожидания ответа, секунды</strong> в дополнительных настройках подключения. Скорость зависит от доступной видеопамяти, оперативной памяти и размера модели.</div>
+      </section>
+      <section class="doc-section" id="browser-chat" aria-labelledby="chat-title" data-search="ChatGPT Claude Gemini browser chat subscription clipboard TXT JSON CSV file batch Arabic one language missing reply placeholders tokens copy request load response">
+        <p class="eyebrow">СПОСОБЫ ПЕРЕВОДА</p><h2 id="chat-title">В моём чате</h2>
+        <p>Используйте чат с ИИ, который принимает текст или вложения. Вы сами отправляете запрос, а затем возвращаете ответ в LocDoctor. Ключ API для этого способа не нужен.</p>
+        <ol class="steps"><li>Выберите <strong>В моём чате</strong>. Подпись <strong>Текущий запрос</strong> или <strong>Первый запрос</strong> показывает язык и часть текущего запроса.</li><li>Нажмите <strong>Скачать файл для чата</strong>. Для первой попытки выберите <strong>TXT: инструкция и тексты вместе</strong>.</li><li>Прикрепите файл в своём чате с ИИ. Попросите следовать инструкциям из файла и вернуть полный ответ с переводами.</li><li>Нажмите <strong>Загрузить ответ</strong>, чтобы загрузить файл ответа. Также можно вставить полный JSON-ответ в поле и нажать <strong>Проверить ответ</strong> или воспользоваться <strong>Вставить и проверить ответ</strong>.</li><li>Прочитайте предпросмотр. Если все проверки пройдены, нажмите <strong>Применить переводы</strong>. Переводы сохранятся как черновики.</li><li>Скачайте или скопируйте следующий запрос. Повторяйте действия, пока не останется необработанных запросов. Затем проверьте переводы.</li></ol>
+        <div class="callout"><strong>Один язык в запросе является нормальным поведением.</strong> Запрос содержит до 20 текстов для одного языка. При выборе нескольких языков первый запрос охватывает только один. После применения ответа LocDoctor переходит к следующей части или языку и обновляет подпись.</div>
+        <h3>Какой формат файла выбрать?</h3>
+        <figure class="screenshot"><a href="../assets/screens/ru/chat-request.png" target="_blank" rel="noopener"><img src="../assets/screens/ru/chat-request.png" width="1920" height="1080" alt="Страница обмена с чатом показывает текущий язык запроса, формат файла и действия для загрузки ответа." loading="lazy"></a><figcaption>Каждый запрос для чата содержит один язык.</figcaption></figure>
+        <div class="table-scroll"><table><caption>Форматы файлов запроса для чата</caption><thead><tr><th>Формат</th><th>Когда использовать</th><th>Что прикрепить</th></tr></thead><tbody><tr><td>TXT</td><td>Для первой попытки.</td><td>Один файл с инструкциями и текстами.</td></tr><tr><td>JSON</td><td>Для чата или инструмента, который хорошо работает со структурированными данными.</td><td>JSON-запрос вместе с его инструкциями.</td></tr><tr><td>CSV</td><td>Для таблицы, которую нужно просмотреть или передать.</td><td>CSV и отдельный файл инструкций.</td></tr></tbody></table></div>
+        <p>Ответ можно загрузить как JSON, как TXT с полным JSON-ответом или как CSV с колонками <code>batch</code>, <code>culture</code>, <code>i</code> и <code>t</code>. Если чат не принимает вложения, используйте <strong>Скопировать запрос</strong>. Отправка файла не отменяет ограничений чата на контекст и вложения.</p>
+        <h3>Что проверяется в ответе?</h3>
+        <p>LocDoctor проверяет идентификатор запроса, язык, идентификаторы текстов и переменные форматирования. Каждый запрошенный элемент должен присутствовать ровно один раз. Тексты игры и словарь должны по-прежнему соответствовать выгруженному запросу.</p>
+        <p>Если после выгрузки вы изменили исходный текст, перевод или словарь, создайте новый запрос. Если ответ неполный или переменная изменена, попросите чат исправить ответ. Текущий запрос сохраняется локально в проекте, поэтому работу можно продолжить после перезапуска редактора.</p>
+      </section>
+      <section class="doc-section" id="api" aria-labelledby="api-title" data-search="API OpenRouter OpenAI Google Gemini Groq custom own server endpoint URL key authentication billing subscription token error connection model ID">
+        <p class="eyebrow">СПОСОБЫ ПЕРЕВОДА</p><h2 id="api-title">Через API</h2>
+        <p>LocDoctor автоматически отправляет запросы выбранному сервису. Создайте ключ API в личном кабинете этого сервиса. Перед началом проверьте доступность модели и условия оплаты.</p>
+        <ol class="steps"><li>Выберите <strong>Через API</strong> и сервис, например OpenRouter, OpenAI, Google Gemini или Groq.</li><li>Откройте <strong>Дополнительные настройки</strong>. Введите <strong>Ключ API, если требуется</strong>. Для другого сервиса выберите <strong>Другой сервис / Свой сервер</strong> и укажите адрес и формат API из его документации.</li><li>Нажмите <strong>Найти модели</strong> и выберите модель. Если сервис не предоставляет список, введите точное <strong>Название модели в API</strong>.</li><li>Для сервера за пределами этого компьютера включите <strong>Разрешить отправку текстов игры на этот сервер</strong>.</li><li>Нажмите <strong>Проверить подключение</strong> и дождитесь короткого тестового перевода. После успешной проверки нажмите <strong>Перевести тексты</strong>.</li></ol>
+        <h3>Подключение другого сервиса</h3>
+        <figure class="screenshot"><a href="../assets/screens/ru/connection.png" target="_blank" rel="noopener"><img src="../assets/screens/ru/connection.png" width="1920" height="1080" alt="Настройки подключения с полями адреса API, формата, ключа и модели." loading="lazy"></a><figcaption>Укажите адрес API сервиса и его идентификатор модели.</figcaption></figure>
+        <div class="table-scroll"><table><caption>Поля подключения к API</caption><thead><tr><th>Поле</th><th>Что указать</th></tr></thead><tbody><tr><td>Название подключения</td><td>Понятное вам имя, например «Сервер команды перевода».</td></tr><tr><td>Адрес API</td><td>Базовый адрес API из документации сервиса, например <code>https://openrouter.ai/api/v1</code>. Адрес обычного сайта чата не подойдёт.</td></tr><tr><td>Формат API</td><td>Формат «Совместимый с OpenAI» подходит для соответствующего API Chat Completions, а Ollama для API Ollama. Для других форматов нужна отдельная интеграция.</td></tr><tr><td>Ключ API</td><td>Ключ, выданный сервисом или сервером, если он требуется.</td></tr><tr><td>Название модели в API</td><td>Точный идентификатор, который ожидает сервер. Название модели на сайте может отличаться.</td></tr><tr><td>Время ожидания ответа, секунды</td><td>Значение от 1 до 600. Увеличьте его для медленной модели или сервера.</td></tr></tbody></table></div>
+        <div class="callout"><strong>Подписка на чат может не включать доступ к API.</strong> Если у вас есть доступ только к сайту чата, выберите <strong>В моём чате</strong>. Для автоматического перевода нужен доступ к API выбранного сервиса.</div>
+        <p class="small">Ключи API хранятся в локальных настройках пользователя в папке Saved/Config проекта. Эти настройки не зашифрованы. LocDoctor не включает ключи в файлы запросов для чата, историю переводов и отчёты.</p>
+      </section>
+      <section class="doc-section" id="review" aria-labelledby="review-title" data-search="review drafts human manual translation save edit corrected checked status selected filters progress count stop resume">
+        <p class="eyebrow">ПРОВЕРКА И ВЫПУСК</p><h2 id="review-title">Проверка переводов</h2>
+        <p>Переводы ИИ сначала сохраняются как <strong>Черновики</strong>. Автоматические проверки помогают сохранить форматирование, но смысл, тон и контекст всё равно нужно проверить.</p>
+        <ol class="steps"><li>Откройте этап <strong>Проверка</strong> или страницу <strong>Тексты</strong>. При необходимости нажмите <strong>Обновить</strong>.</li><li>Ограничьте список фильтрами языка и статуса. На этапе проверки показываются выбранные вами языки перевода.</li><li>Сравните исходный текст с переводом. При необходимости отредактируйте перевод. Проверьте имена, термины, переменные, переносы строк и найденные проблемы.</li><li>Выберите строки для сохранения и нажмите <strong>Сохранить выбранные переводы</strong>.</li><li>Перед выпуском проверьте переведённые экраны в игре.</li></ol>
+        <div class="table-scroll"><table><caption>Статусы переводов</caption><thead><tr><th>Статус</th><th>Значение</th></tr></thead><tbody><tr><td>Без перевода</td><td>Для этого текста и языка ещё нет сохранённого перевода.</td></tr><tr><td>Черновики</td><td>Перевод ИИ сохранён и ожидает проверки.</td></tr><tr><td>Проверено</td><td>Перевод отмечен как проверенный.</td></tr><tr><td>Ручной перевод</td><td>Ручной перевод защищён от обычной автоматической замены.</td></tr><tr><td>Устаревшие переводы</td><td>После перевода исходный текст изменился. Сверьте перевод с текущим текстом.</td></tr></tbody></table></div>
+        <h3>Как читать счётчик прогресса</h3>
+        <figure class="screenshot"><a href="../assets/screens/ru/review.png" target="_blank" rel="noopener"><img src="../assets/screens/ru/review.png" width="1920" height="1080" alt="Таблица проверки с исходными текстами игры и французскими черновиками в демонстрационном проекте." loading="lazy"></a><figcaption>Примеры текстов игры, переведённых на французский. Проверьте черновики перед выпуском.</figcaption></figure>
+        <p>Прогресс считается по парам «текст и язык». Один исходный текст для четырёх языков означает четыре задания перевода. <strong>Обработано</strong> показывает число обработанных заданий. Чтобы понять, какие переводы успешно сохранены, проверьте результаты и сообщения об ошибках.</p>
+        <p>Остановка автоматического перевода сохраняет готовые результаты. Незавершённую работу можно продолжить, если сохранённое задание доступно. Обычные автоматические задания защищают существующие ручные переводы.</p>
+        <h3>Переменные и форматирование</h3>
+        <p>Сохраняйте переменные <code>{Player}</code> и <code>{Count}</code>, теги Rich Text и переносы строк. В запросах для чата форматирование может заменяться защищёнными токенами, например <code>⟦LD0⟧</code>. Модель должна копировать их точно. При применении корректного ответа LocDoctor восстановит исходное форматирование.</p>
+        <p>Сложные выражения множественного числа и рода требуют ручной проверки. Переводите текст каждой ветви, сохраняя структуру выражения.</p>
+      </section>
+      <section class="doc-section" id="glossary-history" aria-labelledby="glossary-title" data-search="glossary terminology names do not translate required translation term save undo history restore backup recovery">
+        <h2 id="glossary-title">Словарь и история</h2>
+        <h3>Используйте единые термины</h3>
+        <ol class="steps"><li>Откройте <strong>Словарь</strong> и нажмите <strong>Добавить</strong>.</li><li>Введите термин. Выберите <strong>Не переводить</strong> для имени, которое нужно сохранить, или <strong>Обязательный перевод</strong> для точного перевода.</li><li>Задайте переводы для нужных языков. При необходимости включите учёт регистра.</li><li>Перед созданием новых запросов нажмите <strong>Сохранить</strong>.</li></ol>
+        <p>Например, оставьте имя персонажа без изменений или задайте единый перевод игрового термина для каждого языка. Словарь добавляется в новые запросы. Его изменение может сделать уже выгруженный запрос для чата недействительным.</p>
+        <h3>Возврат к предыдущему изменению</h3>
+        <p>Откройте <strong>История</strong>, найдите сохранённый пакет по группе текстов, языку и времени и нажмите <strong>Восстановить</strong>. Перед возвратом LocDoctor проверяет наличие более новых изменений. Если они конфликтуют, сначала проверьте эти изменения.</p>
+        <p>Если запись была прервана, при следующем открытии может появиться <strong>Восстановить прерванные изменения</strong>. Нажмите <strong>Восстановить</strong>, чтобы вернуть сохранённые исходные файлы перед продолжением работы.</p>
+      </section>
+      <section class="doc-section" id="prepare-game" aria-labelledby="prepare-title" data-search="compile prepare for game locres preview original language packaging Localizations to Package Internationalization Support runtime FText packaged build fonts">
+        <p class="eyebrow">ПРОВЕРКА И ВЫПУСК</p><h2 id="prepare-title">Подготовить для игры</h2>
+        <p>На этом этапе сохранённые переводы компилируются в ресурсы локализации Unreal. Готовая игра использует эти ресурсы. Интерфейс редактора LocDoctor в выпущенной игре не запускается.</p>
+        <ol class="steps"><li>Завершите проверку переводов, которые войдут в игру.</li><li>Откройте <strong>Для игры</strong>, выберите группу текстов и нажмите <strong>Подготовить для игры</strong>. Дождитесь сообщения <strong>Ресурсы локализации собраны</strong>.</li><li>Выберите <strong>Язык предпросмотра</strong>. Это обновит пример текста проекта и локализуемые тексты игры в редакторе. Запустите игру в редакторе и проверьте её экраны.</li><li>Нажмите <strong>Исходный язык</strong>, чтобы завершить предпросмотр.</li><li>Откройте <strong>Project Settings &gt; Packaging &gt; Localizations to Package</strong> и включите все языки выпускаемой игры. Проверьте, что настройки интернационализации содержат данные этих языков, и протестируйте упакованную сборку.</li></ol>
+        <div class="callout"><strong>Предпросмотр меняет тексты игры.</strong> Он не переводит меню Unreal Editor и не меняет язык интерфейса LocDoctor. Строки, заданные без локализации, также не изменятся. Игра должна использовать собранные локализуемые FText или записи String Table.</div>
+        <p>После сохранения новых переводов выполните компиляцию снова. Если язык работает в редакторе, но отсутствует в упакованной игре, проверьте включение ресурсов локализации и данных культуры в сборку.</p>
+        <figure class="screenshot"><a href="../assets/screens/ru/prepare-game.png" target="_blank" rel="noopener"><img src="../assets/screens/ru/prepare-game.png" width="1920" height="1080" alt="Страница подготовки для игры с компиляцией ресурсов и выбором языка предпросмотра." loading="lazy"></a><figcaption>Скомпилируйте сохранённые переводы и проверьте игру на каждом языке.</figcaption></figure>
+        <p>Если вместо букв появляются квадраты или символы отсутствуют, используйте <strong>Инструменты &gt; Шрифты</strong>. Проверьте шрифты игры и резервные шрифты для этого языка.</p>
+      </section>
+      <section class="doc-section" id="tools" aria-labelledby="tools-title" data-search="tools project check audit fonts missing glyphs import export CSV PO XLIFF Excel XLSX JSON report translators conflicts">
+        <h2 id="tools-title">Инструменты и обмен файлами</h2>
+        <h3>Проверка проекта</h3>
+        <p>Откройте <strong>Инструменты &gt; Проверка проекта</strong> и запустите проверку. Просмотрите найденные места: локализации могут мешать обычные строковые значения, тексты culture invariant, конфликтующие ключи или фразы, собранные из фрагментов. Первый запуск может быть дольше из-за загрузки ресурсов Unreal.</p>
+        <h3>Шрифты</h3>
+        <p>Откройте <strong>Инструменты &gt; Шрифты</strong>, чтобы проверить наличие символов переводов в выбранных шрифтах игры. Посмотрите отсутствующие символы и незавершённые проверки. Затем проверьте реальные игровые экраны.</p>
+        <h3>Работа с переводчиком</h3>
+        <p>Откройте <strong>Инструменты &gt; Импорт и экспорт</strong> для обмена переводами через файлы <strong>CSV</strong> или <strong>PO</strong>.</p>
+        <ol class="steps"><li>Экспортируйте нужную группу текстов и язык в выбранном формате.</li><li>Переводчик должен менять только переводы, сохраняя идентификаторы текстов, исходные значения и переменные.</li><li>Импортируйте полученный файл и проверьте предложенные изменения.</li><li>Разрешите конфликты с помощью <strong>Сохранить переводы проекта</strong> или <strong>Использовать переводы из файла</strong>, затем нажмите <strong>Сохранить переводы из файла</strong>.</li></ol>
+        <p class="small">CSV для запросов чата и CSV для обмена с переводчиком предназначены для разных задач. Ответ чата загружайте через <strong>В моём чате &gt; Загрузить ответ</strong>. Файлы XLSX и XLIFF в этой версии не поддерживаются.</p>
+      </section>
+      <section class="doc-section" id="troubleshooting" aria-labelledby="troubleshooting-title" data-search="error help failed no models no texts disabled button wrong language API timeout 401 403 429 proxy JSON placeholders preview packaged cannot find plugin">
+        <h2 id="troubleshooting-title">Решение проблем</h2>
+        <details class="qa"><summary>LocDoctor отсутствует в меню Tools</summary><p>Откройте <strong>Edit &gt; Plugins</strong>, найдите и включите LocDoctor. Перезапустите редактор. Если плагина нет в списке, проверьте папку установки и соответствие пакета версии движка. Для пакета с исходным кодом установите совместимые инструменты C++ и соберите редактор.</p></details>
+        <details class="qa"><summary>Тексты не собрались</summary><p>Сохраните ресурсы игры, проверьте папку сбора в настройках группы текстов и повторите сбор. Тексты должны быть локализуемыми FText или String Tables и входить в конфигурацию сбора Unreal. Проверка <strong>Инструменты &gt; Проверка проекта</strong> поможет найти обычные строки и нелокализуемые тексты.</p></details>
+        <details class="qa"><summary>Перевод текстов недоступен</summary><p>Выберите хотя бы один язык и соберите тексты. Для автоматического перевода сначала выберите модель и выполните <strong>Проверить подключение</strong>. Если новых текстов нет, редактируйте существующие переводы на странице <strong>Тексты</strong> или соберите новые тексты и выберите другой язык.</p></details>
+        <details class="qa"><summary>Список локальных моделей пуст</summary><p>Оставьте приложение работающим, включите его локальный API-сервер и скачайте или загрузите текстовую модель. Проверьте адрес и порт API. Для своего сервера введите точное имя модели в дополнительных настройках. Установленное приложение не обязательно означает запущенный API-сервер.</p></details>
+        <details class="qa"><summary>Истекло время проверки подключения</summary><p>Дайте модели время загрузиться. Закройте приложения, занимающие видеопамять, или выберите меньшую модель. Увеличьте <strong>Время ожидания ответа, секунды</strong>. Если сервер совсем не отвечает, проверьте адрес, порт и перенаправление запросов localhost системным прокси.</p></details>
+        <details class="qa"><summary>API возвращает 401 или 403</summary><p>Проверьте, что ключ принадлежит выбранному сервису, действует и даёт доступ к модели. Если локальный сервер требует авторизацию, используйте ключ из настроек API-сервера приложения.</p></details>
+        <details class="qa"><summary>API возвращает 429 или ошибку модели</summary><p>Подождите перед повторной попыткой или выберите другую доступную модель. Проверьте лимиты аккаунта и доступность модели у сервиса. Получение списка моделей не гарантирует, что сервис сможет выполнить перевод.</p></details>
+        <details class="qa"><summary>Запрос для чата содержит только один из выбранных языков</summary><p>Это нормально. В запросе один язык и до 20 текстов. Загрузите, проверьте и примените ответ, затем подготовьте следующий запрос. Текущий или следующий язык показан над кнопками работы с файлами.</p></details>
+        <details class="qa"><summary>Ответ чата отклонён</summary><p>Используйте полный ответ на текущий запрос. Попросите чат вернуть каждый элемент ровно один раз, сохранить значения batch и culture и все переменные. Если тексты проекта или словарь изменились после выгрузки, создайте новый запрос.</p></details>
+        <details class="qa"><summary>Выбор языка предпросмотра не меняет игру</summary><p>Сохраните переводы и сначала нажмите <strong>Подготовить для игры</strong>. Убедитесь, что выбранный язык содержит переводы в нужной группе текстов. Предпросмотр влияет на локализуемые тексты игры, а не на меню Unreal Editor. Обычные строки и несобранные тексты не изменятся.</p></details>
+        <details class="qa"><summary>Язык отсутствует в упакованной игре</summary><p>Скомпилируйте последние сохранённые переводы. Добавьте язык в <strong>Project Settings &gt; Packaging &gt; Localizations to Package</strong> и включите его данные культуры в настройки интернационализации. Проверьте новую упакованную сборку.</p></details>
+        <details class="qa"><summary>Вместо переведённых символов появляются квадраты</summary><p>Проверьте основной и резервные шрифты игры для этого языка. Используйте <strong>Инструменты &gt; Шрифты</strong> для проверки символов и проверьте настоящие виджеты и экраны игры.</p></details>
+      </section>
+      <section class="doc-section" id="faq" aria-labelledby="faq-title" data-search="FAQ common questions AI internet offline subscriptions installed model human existing translation interface languages platforms runtime keys">
+        <h2 id="faq-title">Частые вопросы</h2>
+        <details class="qa"><summary>Нужна ли платная подписка на ИИ?</summary><p>Подписка не входит в LocDoctor. Используйте локальную модель, свой доступ к чату или API. Доступность, ограничения и оплата зависят от выбранного приложения или сервиса.</p></details>
+        <details class="qa"><summary>Можно ли переводить локально без интернета?</summary><p>Да, если модель уже скачана и работает на вашем компьютере. Для установки приложения и загрузки модели интернет может понадобиться. Облачная модель обращается к своему провайдеру, даже если само приложение запущено локально.</p></details>
+        <details class="qa"><summary>Переводит ли LocDoctor картинки, голос и субтитры в видео?</summary><p>Он переводит локализуемые тексты игры, собранные Unreal. Для текста в изображениях, аудио и субтитров нужны собственные исходные тексты и отдельная работа с этим содержимым.</p></details>
+        <details class="qa"><summary>Удаление языка удаляет переводы?</summary><p>Нет. Кнопка <strong>Удалить язык</strong> удаляет язык из настроек группы текстов, сохраняя файлы переводов. Снятие отметки только исключает язык из текущего задания.</p></details>
+        <details class="qa"><summary>Какие языки интерфейса доступны?</summary><p>Английский, русский, немецкий, французский, испанский, бразильский португальский, упрощённый китайский, японский и корейский. Языки перевода вашей игры настраиваются отдельно.</p></details>
+        <details class="qa"><summary>Нужны ли готовой игре LocDoctor или подключение к ИИ?</summary><p>Плагин используется в Unreal Editor. Готовая игра использует скомпилированные ресурсы локализации Unreal. Для игры не нужны модель перевода или доступ к сервису.</p></details>
+      </section>
+      <section class="doc-section" id="version" aria-labelledby="version-title" data-search="version release changelog support NexusForgeUE 1.0.0 Unreal 5.7 5.8 Windows">
+        <h2 id="version-title">Версия и поддержка</h2>
+        <p>Это руководство относится к <strong>LocDoctor 1.0.0</strong> для <strong>Unreal Engine 5.7 и 5.8 на 64-разрядной Windows</strong>.</p>
+        <h3>1.0.0</h3><p>Перевод текстов игры через локальные модели, файлы чата и совместимые API. Настройка языков, проверка черновиков, словарь, история, компиляция локализации, проверка проекта и шрифтов, обмен CSV / PO.</p>
+        <h3>Как сообщить о проблеме</h3>
+        <p>Напишите в поддержку: <a href="mailto:nexusforgeuesupport@gmail.com">nexusforgeuesupport@gmail.com</a>.</p>
+        <p>Укажите версии Unreal Engine и LocDoctor, способ перевода и точное сообщение об ошибке. При проблеме подключения добавьте название приложения или сервиса и модели. Снимок в полном размере поможет показать текущий этап.</p>
+        <p>Перед отправкой снимков и журналов удалите из них ключи API и другие личные данные.</p>
+      </section>
+      <footer class="page-footer"><span>LocDoctor 1.0.0 · NexusForgeUE</span></footer>
+    </main>
+  </div>
+  <dialog id="image-viewer" class="image-viewer" aria-labelledby="image-title"><div class="image-toolbar"><span id="image-title">Скриншот</span><button type="button" id="image-size" aria-pressed="false">Исходный размер</button><button type="button" id="image-close">Закрыть</button></div><div class="image-stage"><img id="large-image" alt=""></div></dialog>
+  <noscript><p class="noscript-note">Все инструкции доступны без JavaScript. Используйте ссылки на разделы для перехода.</p></noscript>
+</body>
+</html>

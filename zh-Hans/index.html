@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="site-root" content="../">
+  <meta name="description" content="了解如何安装 LocDoctor，使用本地 AI 模型、API 或自己的聊天工具翻译 Unreal Engine 游戏文本，并为游戏发布准备翻译资源。">
+  <title>LocDoctor 文档 | Unreal Engine</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/locdoctor.svg">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script src="../assets/app.js" defer></script>
+</head>
+<body data-search-one="找到 {count} 个章节。" data-search-many="找到 {count} 个章节。" data-search-empty="没有找到相关章节。请缩短搜索词后重试。">
+  <a class="skip-link" href="#main">跳转到文档正文</a>
+  <header class="site-header">
+    <a class="brand" href="#overview" aria-label="LocDoctor 文档首页"><img src="../assets/locdoctor.svg" alt="" width="38" height="38"><span>LocDoctor</span></a>
+    <span class="header-label">文档</span>
+    <div class="header-actions"><label class="language-picker"><span class="visually-hidden">文档语言</span><select id="doc-locale" aria-label="文档语言"><option value="en">English</option><option value="zh-Hans" selected>简体中文</option><option value="ru">Русский</option><option value="es">Español</option><option value="pt-BR">Português (Brasil)</option><option value="de">Deutsch</option><option value="ja">日本語</option><option value="fr">Français</option><option value="ko">한국어</option></select></label><span class="version">1.0.0</span><button class="print-button" type="button" id="print-guide">打印指南</button><button class="menu-button" type="button" id="menu-toggle" aria-controls="sidebar" aria-expanded="false">菜单</button></div>
+  </header>
+  <div class="site-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="search-box"><label for="doc-search">搜索本指南</label><input id="doc-search" type="search" placeholder="例如：API 密钥或预览" autocomplete="off" aria-controls="search-results"><div id="search-results" class="search-results" hidden></div><p class="visually-hidden" id="search-status" role="status"></p></div>
+      <nav aria-label="文档章节">
+        <p class="nav-heading">开始使用</p>
+        <a href="#overview" aria-current="location">概览</a>
+        <a href="#installation">安装</a>
+        <a href="#quick-start">第一次翻译</a>
+        <a href="#languages">语言与游戏文本</a>
+        <p class="nav-heading">选择翻译方式</p>
+        <a href="#local-models">在我的电脑上</a>
+        <a href="#browser-chat">在我的聊天中</a>
+        <a href="#api">通过 API</a>
+        <p class="nav-heading">审核与发布</p>
+        <a href="#review">审核翻译</a>
+        <a href="#glossary-history">术语表与历史记录</a>
+        <a href="#prepare-game">准备游戏资源</a>
+        <p class="nav-heading">参考</p>
+        <a href="#tools">工具与文件交换</a>
+        <a href="#troubleshooting">问题排查</a>
+        <a href="#faq">常见问题</a>
+        <a href="#version">版本与支持</a>
+      </nav>
+      <div class="sidebar-footer">Unreal Engine 5.7 / 5.8<br>64 位 Windows</div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <section class="doc-section overview" id="overview" aria-labelledby="overview-title" data-search="getting started beginner introduction AI localization">
+        <p class="eyebrow">LOCDOCTOR 1.0.0 用户指南</p>
+        <h1 id="overview-title">翻译你的游戏。<br>掌握每个用词。</h1>
+        <p class="lead">使用本地模型、自己的 AI 聊天工具或 API 服务翻译 Unreal Engine 游戏文本。在编辑器中审核结果，再为游戏准备翻译资源。</p>
+        <div class="intro-actions"><a class="primary-link" href="#quick-start">开始第一次翻译</a><a class="secondary-link" href="#installation">安装 LocDoctor</a></div>
+        <div class="workflow" aria-label="翻译的五个步骤"><span><b>1</b> 语言</span><span><b>2</b> 文本</span><span><b>3</b> 翻译</span><span><b>4</b> 审核</span><span><b>5</b> 用于游戏</span></div>
+        <div class="intro-note"><strong>第一次使用 AI？</strong>模型负责翻译文本。API 密钥让 LocDoctor 能够连接在线服务。如果你已经在使用 AI 聊天工具，也可以不使用密钥开始翻译。</div>
+        <h2>选择你已经具备的翻译方式</h2>
+        <div class="method-cards">
+          <a href="#local-models"><span class="method-symbol" aria-hidden="true">1</span><h3>在我的电脑上</h3><p>使用已安装的本地文本模型。</p><span>Ollama、LM Studio、Jan、GPT4All</span></a>
+          <a href="#browser-chat"><span class="method-symbol" aria-hidden="true">2</span><h3>在我的聊天中</h3><p>在自己的聊天工具中发送请求文件。</p><span>不需要 API 密钥</span></a>
+          <a href="#api"><span class="method-symbol" aria-hidden="true">3</span><h3>通过 API</h3><p>通过服务自动翻译。</p><span>服务要求时需要提供 API 密钥</span></a>
+        </div>
+      </section>
+      <section class="doc-section" id="installation" aria-labelledby="installation-title" data-search="install enable plugin Plugins missing modules compiler Fab zip Windows version">
+        <p class="eyebrow">开始使用</p><h2 id="installation-title">安装</h2>
+        <p>LocDoctor 1.0.0 支持在 64 位 Windows 上使用 Unreal Engine 5.7 和 5.8。请选择与引擎版本对应的安装包。</p>
+        <h3>通过 Fab 安装</h3>
+        <p>在 Epic Games Launcher 的 Fab 库中，为对应的引擎版本安装插件。打开项目，必要时在 <strong>Edit &gt; Plugins</strong> 中启用 <strong>LocDoctor</strong>，然后重启编辑器。</p>
+        <h3>从 ZIP 安装</h3>
+        <ol class="steps"><li>关闭 Unreal Editor。</li><li>解压安装包，使 <code>LocDoctor.uplugin</code> 直接位于 <code>&lt;YourProject&gt;/Plugins/LocDoctor/</code> 中。如果 ZIP 内已经包含 <code>LocDoctor</code> 文件夹，请将该文件夹放入 <code>Plugins</code>。</li><li>打开项目。必要时在 <strong>Edit &gt; Plugins</strong> 中启用 <strong>LocDoctor</strong>，然后重启编辑器。</li><li>打开 <strong>Tools &gt; LocDoctor</strong>。</li></ol>
+        <pre><code>YourProject/
+  YourProject.uproject
+  Plugins/
+    LocDoctor/
+      LocDoctor.uplugin
+      Resources/
+      Source/</code></pre>
+        <p class="small">包含编译文件的安装包也包含 Binaries 文件夹。如果使用仅含源码的安装包，Unreal 需要兼容的 C++ 编译工具来构建编辑器模块。</p>
+      </section>
+      <section class="doc-section" id="quick-start" aria-labelledby="quick-start-title" data-search="start tutorial first translation collect texts connection drafts setup wizard">
+        <p class="eyebrow">开始使用</p><h2 id="quick-start-title">第一次翻译</h2>
+        <p>建议先选择一种语言和少量游戏文本。本指南中的插件按钮名称与文档语言一致。Unreal Editor 自身的菜单名称使用英文表示。</p>
+        <ol class="steps"><li><strong>选择语言。</strong>打开 <strong>Tools &gt; LocDoctor</strong>。选择游戏原始文本的语言，以及至少一种翻译目标语言。首次使用时，点击 <strong>创建设置并继续</strong>。除非项目需要其他资源文件夹或本地化目标，否则保留默认高级设置。</li><li><strong>收集文本。</strong>在 <strong>文本</strong> 步骤点击 <strong>收集文本</strong>。如果 Unreal 提示保存已修改的游戏资源，请先保存。检查项目摘要中是否出现了预期的文本。</li><li><strong>选择翻译方式。</strong>使用 <a href="#local-models">在我的电脑上</a>、<a href="#browser-chat">在我的聊天中</a> 或 <a href="#api">通过 API</a>。自动翻译需要先选择模型并点击 <strong>检查连接</strong>，完成一次简短的测试翻译。测试成功后，主按钮会变为 <strong>翻译文本</strong>。</li><li><strong>审核结果。</strong>AI 翻译会保存为草稿。在 <strong>审核</strong> 步骤逐条阅读，必要时修改，然后保存选中的翻译。</li><li><strong>准备游戏。</strong>在 <strong>用于游戏</strong> 中点击 <strong>准备游戏资源</strong>。测试游戏的每种语言，并在 <a href="#prepare-game">打包设置</a> 中加入这些语言。</li></ol>
+        <figure class="screenshot"><a href="../assets/screens/zh-Hans/first-run.png" target="_blank" rel="noopener" aria-label="以完整尺寸打开设置截图"><img src="../assets/screens/zh-Hans/first-run.png" width="1920" height="1080" alt="LocDoctor 首次使用设置，包含原文语言和翻译语言的选择项。" loading="lazy"></a><figcaption>Unreal Editor 中的首次使用设置。点击可打开 Full HD 图片。</figcaption></figure>
+      </section>
+      <section class="doc-section" id="languages" aria-labelledby="languages-title" data-search="source original target language add remove FText FString String Table localization gather empty Chinese English Spanish">
+        <h2 id="languages-title">语言与游戏文本</h2>
+        <h3>原文语言、翻译语言与界面语言</h3>
+        <ul><li><strong>原文语言</strong>：游戏原始文本所使用的语言。</li><li><strong>翻译为</strong>：当前翻译任务处理的语言。取消勾选即可将该语言排除在本次任务之外。</li><li><strong>界面语言</strong>：LocDoctor 顶部的语言选择器，只改变插件界面。默认使用英语。</li></ul>
+        <p>本地化目标通常名为 <strong>Game</strong>，用于配置一组文本的 Unreal 本地化设置。如果项目有多个目标，请选择需要翻译的目标。</p>
+        <h3>添加或移除语言</h3>
+        <figure class="screenshot"><a href="../assets/screens/zh-Hans/languages.png" target="_blank" rel="noopener"><img src="../assets/screens/zh-Hans/languages.png" width="1920" height="1080" alt="语言步骤，包含翻译语言以及添加和移除语言的控件。" loading="lazy"></a><figcaption>选择需要处理的语言。</figcaption></figure>
+        <p>最先推荐的是 12 种常用翻译语言。点击 <strong>添加语言</strong>，按名称或 Unreal 语言区域代码查找其他语言。<strong>移除语言</strong> 会从目标配置中移除语言，但保留已保存的翻译文件，以便之后重新添加该语言。</p>
+        <h3>哪些文本可以翻译？</h3>
+        <p>LocDoctor 处理 Unreal 本地化系统收集的可本地化 <code>FText</code> 和 <strong>String Tables</strong>。普通 <code>FString</code> 值，以及标记为 culture invariant 的文本不会自动本地化。可以在 <strong>工具</strong> &gt; <strong>项目检查</strong> 中查找这些情况。</p>
+        <div class="callout"><strong>保持文本标识符稳定。</strong>在游戏资源或代码中修改原文后，重新收集文本。新增或修改的文本可能需要重新翻译。</div>
+      </section>
+      <section class="doc-section" id="local-models" aria-labelledby="local-title" data-search="Ollama LM Studio Jan GPT4All local model server port GPU RAM memory installation discover custom llama.cpp LocalAI vLLM">
+        <p class="eyebrow">翻译方式</p><h2 id="local-title">在我的电脑上</h2>
+        <p>通过电脑上运行的应用使用已下载的文本模型。LocDoctor 连接该应用的 API 服务器。插件不会安装应用或下载模型。</p>
+        <ol class="steps"><li>安装你选择的模型应用。下载支持所需语言、并且能在电脑可用内存中运行的文本生成模型。</li><li>启动应用并启用本地 API 服务器。翻译时保持应用运行。</li><li>在 LocDoctor 中选择 <strong>在我的电脑上</strong>，然后点击 <strong>选择模型</strong>。点击 <strong>查找模型</strong> 可刷新列表。</li><li>选择模型。如果测试尚未开始，点击 <strong>检查连接</strong>，等待简短的测试翻译完成。</li><li>连接就绪后，点击 <strong>翻译文本</strong>。</li></ol>
+        <h3>设置本地应用</h3>
+        <div class="table-scroll"><table><caption>本地应用设置与 LocDoctor 检查的默认地址</caption><thead><tr><th>应用</th><th>需要启动的功能</th><th>默认 API 地址</th></tr></thead><tbody>
+          <tr><td>Ollama</td><td>打开 Ollama，并准备一个已下载的本地文本模型。本地服务器通常随应用启动。</td><td><code>http://127.0.0.1:11434</code></td></tr>
+          <tr><td>LM Studio</td><td>打开 <strong>Developer</strong> 并启动 API 服务器。为服务器提供可用的文本模型。</td><td><code>http://127.0.0.1:1234/v1</code></td></tr>
+          <tr><td>Jan</td><td>打开 <strong>Settings &gt; Local API Server</strong> 并启动服务器。如果需要密钥，请在 LocDoctor 中填写同一密钥。</td><td><code>http://127.0.0.1:1337/v1</code><br>LocDoctor 也会检查端口 <code>6767</code>。</td></tr>
+          <tr><td>GPT4All</td><td>打开 <strong>Settings &gt; Application &gt; Advanced</strong> 并启用 Local API Server，然后加载文本模型。</td><td><code>http://127.0.0.1:4891/v1</code></td></tr>
+        </tbody></table></div>
+        <p class="small">如果更改过端口，请使用应用显示的地址。LocDoctor 向本地服务器获取模型列表，并检查已保存的本地连接。无需扫描磁盘或提供安装文件夹。</p>
+        <p class="reference-links">官方设置指南：<a href="https://docs.ollama.com/quickstart">Ollama</a><a href="https://lmstudio.ai/docs/developer/core/server">LM Studio</a><a href="https://jan.ai/docs/local-api">Jan</a><a href="https://docs.gpt4all.io/gpt4all_api_server/home.html">GPT4All</a></p>
+        <h3>其他应用或自定义端口</h3>
+        <p>在连接设置中选择 <strong>其他应用</strong> 或 <strong>其他服务 / 自己的服务器</strong>。填写 <strong>API 地址</strong>，选择 <strong>Ollama</strong> 或 <strong>兼容 OpenAI</strong> 作为 API 格式，并输入准确的模型名称。llama.cpp、LocalAI 和 vLLM 等服务器的接口支持所选格式时，也可以连接。</p>
+        <div class="callout"><strong>第一次响应可能较慢。</strong>本地应用可能需要先将模型加载到内存。必要时，在连接的高级设置中增大 <strong>响应超时（秒）</strong>。可用显存、内存和模型大小都会影响速度。</div>
+      </section>
+      <section class="doc-section" id="browser-chat" aria-labelledby="chat-title" data-search="ChatGPT Claude Gemini browser chat subscription clipboard TXT JSON CSV file batch Arabic one language missing reply placeholders tokens copy request load response">
+        <p class="eyebrow">翻译方式</p><h2 id="chat-title">在我的聊天中</h2>
+        <p>使用支持粘贴文本或上传附件的 AI 聊天工具。由你发送请求，再将回复导入 LocDoctor。此方式不需要 API 密钥。</p>
+        <ol class="steps"><li>选择 <strong>在我的聊天中</strong>。通过 <strong>当前请求</strong> 或 <strong>第一个请求</strong> 查看当前请求的语言和分段。</li><li>点击 <strong>下载聊天请求文件</strong>。首次尝试建议选择 <strong>TXT：说明与文本放在一起</strong>。</li><li>在 AI 聊天中上传文件。要求它遵循文件中的说明，返回包含所有指定翻译的完整回复。</li><li>点击 <strong>加载回复</strong> 导入回复文件。也可以将完整 JSON 回复粘贴到回复框，再点击 <strong>检查回复</strong>，或使用 <strong>粘贴并检查回复</strong>。</li><li>阅读预览。如果所有检查通过，点击 <strong>应用译文</strong>。翻译会保存为草稿。</li><li>下载或复制下一个请求，重复上述操作，直到没有待处理请求。然后审核翻译。</li></ol>
+        <div class="callout"><strong>每个请求只有一种语言是正常行为。</strong>一个请求最多包含某种语言的 20 条文本。即使选择了多种语言，第一个请求也只处理其中一种。应用回复后，LocDoctor 会切换到下一段或下一种语言，并更新提示。</div>
+        <h3>应该选择哪种文件格式？</h3>
+        <figure class="screenshot"><a href="../assets/screens/zh-Hans/chat-request.png" target="_blank" rel="noopener"><img src="../assets/screens/zh-Hans/chat-request.png" width="1920" height="1080" alt="聊天交换页面显示当前请求的语言、文件格式以及回复操作。" loading="lazy"></a><figcaption>聊天请求每次只包含一种语言。</figcaption></figure>
+        <div class="table-scroll"><table><caption>聊天请求文件格式</caption><thead><tr><th>格式</th><th>适用情况</th><th>需要上传的文件</th></tr></thead><tbody><tr><td>TXT</td><td>最简单的首次尝试。</td><td>包含说明和文本的单个文件。</td></tr><tr><td>JSON</td><td>适合处理结构化数据的聊天工具或程序。</td><td>包含说明的 JSON 请求文件。</td></tr><tr><td>CSV</td><td>需要查看或分享的表格。</td><td>CSV 文件及单独的说明文件。</td></tr></tbody></table></div>
+        <p>回复可以是 JSON 文件、包含完整 JSON 回复的 TXT 文件，或带有 <code>batch</code>、<code>culture</code>、<code>i</code> 和 <code>t</code> 列的 CSV 文件。如果聊天工具不支持附件，可使用 <strong>复制请求</strong>。发送文件并不会取消聊天工具的上下文长度或上传限制。</p>
+        <h3>回复检查会验证什么？</h3>
+        <p>LocDoctor 检查请求标识符、语言、文本标识符和格式占位符。每个请求项必须且只能出现一次。游戏文本和术语表仍需与导出的请求一致。</p>
+        <p>如果导出后修改了原文、翻译或术语表，请创建新请求。如果回复不完整或改动了占位符，请让聊天工具修正。当前请求保存在项目本地，因此重新打开编辑器后可以继续处理。</p>
+      </section>
+      <section class="doc-section" id="api" aria-labelledby="api-title" data-search="API OpenRouter OpenAI Google Gemini Groq custom own server endpoint URL key authentication billing subscription token error connection model ID">
+        <p class="eyebrow">翻译方式</p><h2 id="api-title">通过 API</h2>
+        <p>LocDoctor 会自动向配置的服务发送翻译请求。在该服务的账户页面创建 API 密钥，开始前确认模型是否可用及其计费规则。</p>
+        <ol class="steps"><li>选择 <strong>通过 API</strong>，然后选择 OpenRouter、OpenAI、Google Gemini 或 Groq 等服务预设。</li><li>打开 <strong>高级设置</strong>，填写 <strong>API 密钥（如需要）</strong>。使用自定义服务时，选择 <strong>其他服务 / 自己的服务器</strong>，根据服务文档填写 API 地址和格式。</li><li>点击 <strong>查找模型</strong> 并选择模型。如果服务不提供模型列表，请填写准确的 <strong>API 中的模型名称</strong>。</li><li>连接本机以外的服务器时，启用 <strong>允许将游戏文本发送到此服务器</strong>。</li><li>点击 <strong>检查连接</strong> 并等待简短的测试翻译。测试成功后，点击 <strong>翻译文本</strong>。</li></ol>
+        <h3>连接自定义服务</h3>
+        <figure class="screenshot"><a href="../assets/screens/zh-Hans/connection.png" target="_blank" rel="noopener"><img src="../assets/screens/zh-Hans/connection.png" width="1920" height="1080" alt="连接设置，包含 API 地址、格式、密钥和模型字段。" loading="lazy"></a><figcaption>使用服务提供的 API 地址和模型标识符。</figcaption></figure>
+        <div class="table-scroll"><table><caption>自定义 API 连接字段</caption><thead><tr><th>字段</th><th>填写内容</th></tr></thead><tbody><tr><td>连接名称</td><td>一个便于识别的名称，例如“团队翻译服务器”。</td></tr><tr><td>API 地址</td><td>服务文档中的 API 基础地址，例如 <code>https://openrouter.ai/api/v1</code>。聊天网站的网址不能用于此处。</td></tr><tr><td>API 格式</td><td>兼容的 Chat Completions 接口选择兼容 OpenAI；Ollama 接口选择 Ollama。尚不支持的 API 格式需要单独集成。</td></tr><tr><td>API 密钥</td><td>服务或服务器要求时，填写其提供的密钥。</td></tr><tr><td>API 中的模型名称</td><td>服务器要求的准确模型标识符，可能与网站上的显示名称不同。</td></tr><tr><td>响应超时（秒）</td><td>1 到 600 之间的值。模型或服务器较慢时可增大。</td></tr></tbody></table></div>
+        <div class="callout"><strong>聊天订阅不一定包含 API 权限。</strong>如果你只能使用聊天网站，请选择 <strong>在我的聊天中</strong>。自动翻译需要服务提供的 API 权限。</div>
+        <p class="small">API 密钥保存在项目 Saved/Config 文件夹下的本地用户设置中。设置文件不加密。密钥不会包含在 LocDoctor 的聊天请求文件、翻译历史记录或报告中。</p>
+      </section>
+      <section class="doc-section" id="review" aria-labelledby="review-title" data-search="review drafts human manual translation save edit corrected checked status selected filters progress count stop resume">
+        <p class="eyebrow">审核与发布</p><h2 id="review-title">审核翻译</h2>
+        <p>AI 翻译最初保存为 <strong>草稿</strong>。自动检查帮助保留格式，但你仍需审核含义、语气和上下文。</p>
+        <ol class="steps"><li>打开 <strong>审核</strong> 步骤或 <strong>文本</strong> 页面。必要时点击 <strong>刷新</strong>。</li><li>使用语言和状态筛选器缩小列表范围。引导式审核只显示所选的翻译语言。</li><li>对照原文和译文，必要时修改翻译框。检查名称、术语、占位符、换行和已报告的问题。</li><li>选择需要保存的行，然后点击 <strong>保存所选翻译</strong>。</li><li>发布前，在游戏中检查翻译后的界面。</li></ol>
+        <div class="table-scroll"><table><caption>翻译状态</caption><thead><tr><th>状态</th><th>含义</th></tr></thead><tbody><tr><td>未翻译</td><td>此文本在该语言下尚无已保存的翻译。</td></tr><tr><td>草稿</td><td>AI 翻译已保存，等待审核。</td></tr><tr><td>已审核</td><td>翻译已标记为审核通过。</td></tr><tr><td>人工翻译</td><td>人工翻译受到保护，不会被常规自动翻译替换。</td></tr><tr><td>过时的翻译</td><td>原文在翻译后发生了变化。请与当前原文对照检查。</td></tr></tbody></table></div>
+        <h3>理解进度计数</h3>
+        <figure class="screenshot"><a href="../assets/screens/zh-Hans/review.png" target="_blank" rel="noopener"><img src="../assets/screens/zh-Hans/review.png" width="1920" height="1080" alt="审核表格对照示例项目的原始游戏文本和法语翻译草稿。" loading="lazy"></a><figcaption>游戏示例文本的法语翻译。发布前请审核草稿。</figcaption></figure>
+        <p>进度按“文本与语言”的组合计数。一条原文翻译为四种语言，就是四项翻译任务。<strong>已处理</strong> 表示已处理的任务数量。请查看已保存的结果及错误信息，确认哪些任务成功完成。</p>
+        <p>停止自动翻译会保留已经完成的结果。存在可用的已保存任务时，可以继续未完成的工作。常规自动翻译任务会保护已有的人工翻译。</p>
+        <h3>格式占位符</h3>
+        <p>保留 <code>{Player}</code>、<code>{Count}</code> 等变量、Rich Text 标签和换行。聊天请求可能把格式替换为 <code>⟦LD0⟧</code> 等受保护标记；模型必须逐字复制这些标记。应用有效回复时，LocDoctor 会恢复原始格式。</p>
+        <p>复杂的复数和性别表达式需要人工审核。请翻译每个分支内的文本，保留表达式结构。</p>
+      </section>
+      <section class="doc-section" id="glossary-history" aria-labelledby="glossary-title" data-search="glossary terminology names do not translate required translation term save undo history restore backup recovery">
+        <h2 id="glossary-title">术语表与历史记录</h2>
+        <h3>统一术语用法</h3>
+        <ol class="steps"><li>打开 <strong>术语表</strong>，点击 <strong>添加</strong>。</li><li>输入术语。需要保留名称时选择 <strong>不翻译</strong>；需要指定准确译法时选择 <strong>指定译法</strong>。</li><li>为需要的语言填写翻译，并根据需要启用区分大小写。</li><li>准备新请求前，点击 <strong>保存</strong>。</li></ol>
+        <p>例如，保留角色名字，或为某个游戏术语指定各语言的统一译法。术语表会加入新翻译请求。修改术语表可能使已经导出的聊天请求失效。</p>
+        <h3>恢复以前的修改</h3>
+        <p>打开 <strong>历史记录</strong>，按目标、语言和时间找到已保存的批次，然后点击 <strong>恢复</strong>。恢复旧数据前，LocDoctor 会检查是否有更新的修改。如有冲突，请先检查这些修改。</p>
+        <p>如果写入中断，下次打开时可能出现 <strong>恢复中断的更改</strong>。使用 <strong>恢复</strong> 恢复已备份的原始文件，再继续操作。</p>
+      </section>
+      <section class="doc-section" id="prepare-game" aria-labelledby="prepare-title" data-search="compile prepare for game locres preview original language packaging Localizations to Package Internationalization Support runtime FText packaged build fonts">
+        <p class="eyebrow">审核与发布</p><h2 id="prepare-title">准备游戏资源</h2>
+        <p>此步骤将已保存的翻译编译成 Unreal 本地化资源。最终游戏使用这些资源。发布的游戏不会运行 LocDoctor 的编辑器界面。</p>
+        <ol class="steps"><li>先完成准备发布的翻译审核。</li><li>打开 <strong>用于游戏</strong>，选择本地化目标并点击 <strong>准备游戏资源</strong>。等待显示 <strong>本地化资源已编译</strong>。</li><li>选择 <strong>预览语言</strong>，更新项目文本示例和编辑器中的本地化游戏文本。在编辑器中运行游戏，检查各个界面。</li><li>点击 <strong>原始语言</strong> 结束预览。</li><li>打开 <strong>Project Settings &gt; Packaging &gt; Localizations to Package</strong>，加入准备发布的所有语言。确认项目国际化设置包含这些语言的数据，然后测试打包后的游戏。</li></ol>
+        <div class="callout"><strong>预览改变的是游戏文本。</strong>它不会翻译 Unreal Editor 菜单，也不会改变 LocDoctor 界面语言。硬编码的普通字符串同样不会变化。游戏必须使用已收集的可本地化 FText 或 String Table 条目。</div>
+        <p>保存新翻译后，请重新编译。如果某种语言在编辑器中正常、在打包游戏中却缺失，请检查是否包含对应的本地化资源和语言区域数据。</p>
+        <figure class="screenshot"><a href="../assets/screens/zh-Hans/prepare-game.png" target="_blank" rel="noopener"><img src="../assets/screens/zh-Hans/prepare-game.png" width="1920" height="1080" alt="游戏资源准备页面，包含编译和游戏语言预览控件。" loading="lazy"></a><figcaption>编译已保存的翻译，然后测试游戏的每种语言。</figcaption></figure>
+        <p>如果字符缺失或显示为方框，请打开 <strong>工具</strong> &gt; <strong>字体</strong>，检查游戏的字体资源及该语言的回退字体。</p>
+      </section>
+      <section class="doc-section" id="tools" aria-labelledby="tools-title" data-search="tools project check audit fonts missing glyphs import export CSV PO XLIFF Excel XLSX JSON report translators conflicts">
+        <h2 id="tools-title">工具与文件交换</h2>
+        <h3>项目检查</h3>
+        <p>打开 <strong>工具</strong> &gt; <strong>项目检查</strong> 并运行检查。查看报告位置，排查可能阻碍本地化的硬编码字符串、culture invariant 文本、冲突的键或由片段拼接的句子。首次检查期间 Unreal 需要加载资源，可能耗时较长。</p>
+        <h3>字体</h3>
+        <p>打开 <strong>工具</strong> &gt; <strong>字体</strong>，检查所选游戏字体是否包含翻译所需字符。查看缺失字符与未完成的检查，再到真实游戏界面中验证。</p>
+        <h3>与译者协作</h3>
+        <p>打开 <strong>工具</strong> &gt; <strong>导入与导出</strong>，通过 <strong>CSV</strong> 或 <strong>PO</strong> 文件交换翻译。</p>
+        <ol class="steps"><li>以所需格式导出选中的目标和语言。</li><li>译者应只修改译文，保留文本标识符、原文和占位符。</li><li>导入返回的文件，审核待应用的修改。</li><li>使用 <strong>保留项目翻译</strong> 或 <strong>使用文件翻译</strong> 处理冲突，然后点击 <strong>保存导入的翻译</strong>。</li></ol>
+        <p class="small">聊天请求 CSV 和译者交换 CSV 用于不同流程。聊天回复应通过 <strong>在我的聊天中</strong> &gt; <strong>加载回复</strong> 导入。本版本不支持 XLSX 和 XLIFF 文件。</p>
+      </section>
+      <section class="doc-section" id="troubleshooting" aria-labelledby="troubleshooting-title" data-search="error help failed no models no texts disabled button wrong language API timeout 401 403 429 proxy JSON placeholders preview packaged cannot find plugin">
+        <h2 id="troubleshooting-title">问题排查</h2>
+        <details class="qa"><summary>Tools 菜单中找不到 LocDoctor</summary><p>在 <strong>Edit &gt; Plugins</strong> 中搜索并启用 LocDoctor，然后重启编辑器。如果插件列表中也没有，请检查安装文件夹，以及安装包是否对应引擎版本。仅含源码的安装包需要安装兼容 Unreal 的 C++ 编译工具，并构建编辑器目标。</p></details>
+        <details class="qa"><summary>没有收集到文本</summary><p>保存游戏资源，检查目标的收集文件夹，然后重新收集。文本必须是可本地化 FText 或 String Tables，并包含在 Unreal 的文本收集配置中。运行 <strong>工具</strong> &gt; <strong>项目检查</strong>，检查硬编码或不可本地化的字符串。</p></details>
+        <details class="qa"><summary>无法开始翻译文本</summary><p>选择至少一种翻译语言并收集文本。自动翻译需先选择模型，完成 <strong>检查连接</strong>。如果没有待翻译文本，可在 <strong>文本</strong> 中修改已有翻译，或收集新文本并选择其他语言。</p></details>
+        <details class="qa"><summary>本地模型列表为空</summary><p>保持模型应用运行，启用其本地 API 服务器，并安装或加载文本生成模型。检查 API 地址和端口。自定义服务器需要在高级设置中填写准确的模型名。应用已经安装，不代表 API 服务器已经启动。</p></details>
+        <details class="qa"><summary>连接检查超时</summary><p>等待本地模型加载，关闭占用显存的其他应用，或换用较小模型。增大 <strong>响应超时（秒）</strong>。如果服务器完全没有响应，请检查地址、端口，以及系统代理是否重定向了 localhost 请求。</p></details>
+        <details class="qa"><summary>API 返回 401 或 403</summary><p>检查密钥是否属于所选服务、是否有效，以及是否有权使用模型。本地服务器启用认证时，请使用该应用 API 服务器设置中的密钥。</p></details>
+        <details class="qa"><summary>API 返回 429 或模型错误</summary><p>稍后重试，或选择其他可用模型。检查服务的账户限额和模型可用性。成功获取模型列表并不保证服务能够生成翻译。</p></details>
+        <details class="qa"><summary>聊天请求只包含一种已选语言</summary><p>这是正常行为。每个请求包含一种语言和最多 20 条文本。加载、检查并应用回复后，再准备下一个请求。文件操作控件上方会显示当前或下一种语言。</p></details>
+        <details class="qa"><summary>聊天回复被拒绝</summary><p>使用当前请求对应的完整回复。要求聊天工具让每个指定项出现且只出现一次，保持 batch 和 culture 不变，并保留所有占位符。如果导出后修改过项目文本或术语表，请创建新请求。</p></details>
+        <details class="qa"><summary>改变预览语言后游戏没有变化</summary><p>保存翻译后，先点击 <strong>准备游戏资源</strong>。确认所选目标包含该预览语言的翻译。预览影响的是本地化游戏文本，不是 Unreal Editor 菜单。普通字符串和未收集的文本不会改变。</p></details>
+        <details class="qa"><summary>打包游戏中缺少某种语言</summary><p>编译最新保存的翻译。在 <strong>Project Settings &gt; Packaging &gt; Localizations to Package</strong> 中加入该语言，并在国际化设置中包含对应的语言区域数据。重新打包后测试。</p></details>
+        <details class="qa"><summary>翻译后的字符显示为方框</summary><p>检查游戏字体及该语言的回退字体。使用 <strong>工具</strong> &gt; <strong>字体</strong> 检查字符覆盖情况，然后测试真实游戏控件与界面。</p></details>
+      </section>
+      <section class="doc-section" id="faq" aria-labelledby="faq-title" data-search="FAQ common questions AI internet offline subscriptions installed model human existing translation interface languages platforms runtime keys">
+        <h2 id="faq-title">常见问题</h2>
+        <details class="qa"><summary>需要付费 AI 订阅吗？</summary><p>LocDoctor 不包含订阅。你可以使用本地模型、自己的聊天账户或服务的 API 权限。可用性、使用限额及费用取决于选择的应用或服务。</p></details>
+        <details class="qa"><summary>本地翻译可以离线使用吗？</summary><p>可以，前提是模型已经下载并在本地运行。安装应用和下载模型时可能需要联网。云端模型仍会连接其服务提供方，即使应用本身运行在本机。</p></details>
+        <details class="qa"><summary>LocDoctor 能翻译图片、语音或视频字幕吗？</summary><p>它翻译 Unreal 收集的可本地化游戏文本。图片中的文字、音频和视频字幕需要各自的原始文本及单独的内容处理流程。</p></details>
+        <details class="qa"><summary>移除语言会删除已有翻译吗？</summary><p>不会。<strong>移除语言</strong> 将语言移出目标配置，保留翻译文件。取消勾选只是将该语言排除在当前任务之外。</p></details>
+        <details class="qa"><summary>支持哪些界面语言？</summary><p>英语、俄语、德语、法语、西班牙语、巴西葡萄牙语、简体中文、日语和韩语。游戏的翻译目标语言单独设置。</p></details>
+        <details class="qa"><summary>发布后的游戏需要 LocDoctor 或 AI 连接吗？</summary><p>插件用于 Unreal Editor。最终游戏使用 Unreal 编译出的本地化资源，游玩时不需要翻译模型或翻译服务。</p></details>
+      </section>
+      <section class="doc-section" id="version" aria-labelledby="version-title" data-search="version release changelog support NexusForgeUE 1.0.0 Unreal 5.7 5.8 Windows">
+        <h2 id="version-title">版本与支持</h2>
+        <p>本指南适用于 <strong>LocDoctor 1.0.0</strong>，支持 <strong>64 位 Windows 上的 Unreal Engine 5.7 和 5.8</strong>。</p>
+        <h3>1.0.0</h3><p>通过本地模型、聊天文件和兼容 API 翻译游戏文本。提供语言设置、草稿审核、术语表、历史记录、本地化编译、项目检查、字体检查及 CSV / PO 交换。</p>
+        <h3>报告问题</h3>
+        <p>联系支持：<a href="mailto:nexusforgeuesupport@gmail.com">nexusforgeuesupport@gmail.com</a>。</p>
+        <p>提供 Unreal Engine 和 LocDoctor 版本、翻译方式及完整错误信息。连接问题还需提供应用或服务名称和模型名称。完整尺寸的截图有助于说明当前步骤。</p>
+        <p>分享截图或日志前，请移除 API 密钥及其他私人信息。</p>
+      </section>
+      <footer class="page-footer"><span>LocDoctor 1.0.0 · NexusForgeUE</span></footer>
+    </main>
+  </div>
+  <dialog id="image-viewer" class="image-viewer" aria-labelledby="image-title"><div class="image-toolbar"><span id="image-title">截图</span><button type="button" id="image-size" aria-pressed="false">原始尺寸</button><button type="button" id="image-close">关闭图片</button></div><div class="image-stage"><img id="large-image" alt=""></div></dialog>
+  <noscript><p class="noscript-note">不启用 JavaScript 也能查看所有说明。请使用章节链接导航。</p></noscript>
+</body>
+</html>
